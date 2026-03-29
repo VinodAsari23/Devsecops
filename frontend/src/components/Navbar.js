@@ -1,51 +1,60 @@
 /**
- * Navigation bar component for the Research Paper Annotation Tool.
- * Displays the ScholarNotes brand, navigation links, and user controls.
- * Only rendered for authenticated users within private routes.
+ * Sidebar navigation for the Research Paper Annotation Tool.
+ * Fixed left sidebar with links and user controls.
  */
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
-/**
- * Navbar component providing primary navigation across the application.
- * Shows links to Dashboard, Add Paper, and Search pages.
- * Displays the current user's name and a logout button.
- * @returns {JSX.Element} The rendered navigation bar.
- */
-const Navbar = () => {
+const Sidebar = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  /**
-   * Handle user logout and redirect to the login page.
-   */
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
+  const isActive = (path) => location.pathname === path ? 'sidebar-link active' : 'sidebar-link';
+
   return (
-    <nav className="navbar">
-      <div className="navbar-inner">
-        <Link to="/dashboard" className="navbar-brand">
-          ScholarNotes
-        </Link>
-        <div className="navbar-links">
-          <Link to="/dashboard" className="navbar-link">Dashboard</Link>
-          <Link to="/papers/add" className="navbar-link">Add Paper</Link>
-          <Link to="/search" className="navbar-link">Search</Link>
-        </div>
-        <div className="navbar-user">
-          <span className="navbar-welcome">Welcome, {user?.username}</span>
-          <button onClick={handleLogout} className="navbar-logout-btn">
-            Logout
-          </button>
-        </div>
+    <aside className="sidebar">
+      <div className="sidebar-brand">
+        <div className="sidebar-brand-text">ScholarNotes</div>
+        <div className="sidebar-brand-sub">Research Annotation</div>
       </div>
-    </nav>
+
+      <nav className="sidebar-nav">
+        <Link to="/dashboard" className={isActive('/dashboard')}>
+          <span className="sidebar-icon">D</span>
+          <span>Dashboard</span>
+        </Link>
+        <Link to="/papers/add" className={isActive('/papers/add')}>
+          <span className="sidebar-icon">+</span>
+          <span>Add Paper</span>
+        </Link>
+        <Link to="/search" className={isActive('/search')}>
+          <span className="sidebar-icon">S</span>
+          <span>Search</span>
+        </Link>
+      </nav>
+
+      <div className="sidebar-footer">
+        <div className="sidebar-user">
+          <div className="sidebar-avatar">{user?.username?.charAt(0).toUpperCase()}</div>
+          <div className="sidebar-user-info">
+            <span className="sidebar-username">{user?.username}</span>
+            <span className="sidebar-role">{user?.role}</span>
+          </div>
+        </div>
+        <button onClick={handleLogout} className="sidebar-logout-btn">
+          Logout
+        </button>
+      </div>
+    </aside>
   );
 };
 
-export default Navbar;
+export default Sidebar;

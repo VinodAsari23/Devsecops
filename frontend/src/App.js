@@ -1,13 +1,13 @@
 /**
- * Root application component.
- * Configures routing and wraps the application in the AuthProvider context.
- * All private routes require authentication via the PrivateRoute wrapper.
+ * Root application component with sidebar layout.
+ * Public routes (login/signup) render without sidebar.
+ * Private routes render with a fixed sidebar and main content area.
  */
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
-import Navbar from './components/Navbar';
+import Sidebar from './components/Navbar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -19,9 +19,17 @@ import EditAnnotation from './pages/EditAnnotation';
 import './App.css';
 
 /**
- * App component serving as the root of the application tree.
- * @returns {JSX.Element} The rendered application with routing configuration.
+ * Layout wrapper that renders the sidebar alongside the page content.
  */
+const AppLayout = ({ children }) => (
+  <>
+    <Sidebar />
+    <div className="main-content">
+      {children}
+    </div>
+  </>
+);
+
 function App() {
   return (
     <AuthProvider>
@@ -30,60 +38,24 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <Dashboard />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/papers/add"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <AddPaper />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/papers/:id"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <PaperDetail />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/papers/:id/edit"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <EditPaper />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/papers/:id/annotations/:annId/edit"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <EditAnnotation />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <PrivateRoute>
-                  <Navbar />
-                  <SearchPapers />
-                </PrivateRoute>
-              }
-            />
+            <Route path="/dashboard" element={
+              <PrivateRoute><AppLayout><Dashboard /></AppLayout></PrivateRoute>
+            } />
+            <Route path="/papers/add" element={
+              <PrivateRoute><AppLayout><AddPaper /></AppLayout></PrivateRoute>
+            } />
+            <Route path="/papers/:id" element={
+              <PrivateRoute><AppLayout><PaperDetail /></AppLayout></PrivateRoute>
+            } />
+            <Route path="/papers/:id/edit" element={
+              <PrivateRoute><AppLayout><EditPaper /></AppLayout></PrivateRoute>
+            } />
+            <Route path="/papers/:id/annotations/:annId/edit" element={
+              <PrivateRoute><AppLayout><EditAnnotation /></AppLayout></PrivateRoute>
+            } />
+            <Route path="/search" element={
+              <PrivateRoute><AppLayout><SearchPapers /></AppLayout></PrivateRoute>
+            } />
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </div>
