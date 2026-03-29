@@ -1,0 +1,134 @@
+/**
+ * Styles for the Signup page.
+ * Matches the purple academic theme of the login page.
+ */
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 50%, #b39ddb 100%);
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(94, 53, 177, 0.2);
+}
+
+.signup-header {
+  background: linear-gradient(135deg, #5e35b1 0%, #7c4dff 50%, #651fff 100%);
+  padding: 36px 32px 28px;
+  text-align: center;
+}
+
+.signup-brand {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.signup-subtitle {
+  color: #e0d0f5;
+  font-size: 0.95rem;
+}
+
+.signup-body {
+  padding: 32px;
+}
+
+.signup-error {
+  background: #fce4ec;
+  color: #c62828;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  font-size: 0.85rem;
+  border-left: 4px solid #f44336;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signup-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.signup-input {
+  padding: 12px 14px;
+  border: 2px solid #e0d5f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: #1a1a2e;
+}
+
+.signup-input:focus {
+  outline: none;
+  border-color: #7c4dff;
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.15);
+}
+
+.signup-input::placeholder {
+  color: #b0a0c8;
+}
+
+.signup-submit-btn {
+  background: linear-gradient(135deg, #5e35b1 0%, #7c4dff 100%);
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.signup-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(94, 53, 177, 0.35);
+}
+
+.signup-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.signup-footer-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.88rem;
+  color: #6a5a8a;
+}
+
+.signup-login-link {
+  color: #7c4dff;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.signup-login-link:hover {
+  color: #5e35b1;
+}

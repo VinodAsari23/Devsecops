@@ -1,0 +1,251 @@
+/**
+ * Styles for the Login page.
+ * Unique centered card design with purple gradient header.
+ */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 50%, #b39ddb 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(94, 53, 177, 0.2);
+}
+
+.login-header {
+  background: linear-gradient(135deg, #5e35b1 0%, #7c4dff 50%, #651fff 100%);
+  padding: 40px 32px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-header-decoration {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.login-brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.login-subtitle {
+  color: #e0d0f5;
+  font-size: 0.95rem;
+  font-weight: 400;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.login-institution {
+  color: #c9b8e8;
+  font-size: 0.78rem;
+  font-weight: 300;
+  position: relative;
+}
+
+.login-body {
+  padding: 32px;
+}
+
+.login-error {
+  background: #fce4ec;
+  color: #c62828;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  font-size: 0.85rem;
+  border-left: 4px solid #f44336;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-input {
+  padding: 12px 14px;
+  border: 2px solid #e0d5f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: #1a1a2e;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #7c4dff;
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.15);
+}
+
+.login-input::placeholder {
+  color: #b0a0c8;
+}
+
+.login-submit-btn {
+  background: linear-gradient(135deg, #5e35b1 0%, #7c4dff 100%);
+  color: #ffffff;
+  border: none;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.login-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(94, 53, 177, 0.35);
+}
+
+.login-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0d5f0;
+}
+
+.login-divider span {
+  font-size: 0.82rem;
+  color: #9e8cb8;
+  font-weight: 500;
+}
+
+.login-examiner-box {
+  background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+  border: 1px solid #d1c4e9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-examiner-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #5e35b1;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.login-examiner-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.login-credential-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.login-credential-label {
+  color: #6a5a8a;
+  font-weight: 500;
+}
+
+.login-credential-value {
+  background: #ffffff;
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #5e35b1;
+  font-weight: 600;
+  border: 1px solid #d1c4e9;
+}
+
+.login-examiner-btn {
+  background: #5e35b1;
+  color: #ffffff;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.login-examiner-btn:hover:not(:disabled) {
+  background: #4527a0;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(94, 53, 177, 0.3);
+}
+
+.login-examiner-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login-footer-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.88rem;
+  color: #6a5a8a;
+}
+
+.login-signup-link {
+  color: #7c4dff;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.login-signup-link:hover {
+  color: #5e35b1;
+}

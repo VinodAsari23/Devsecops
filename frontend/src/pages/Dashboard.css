@@ -1,0 +1,68 @@
+/**
+ * Styles for the Dashboard page.
+ * Stats bar and paper card grid layout.
+ */
+
+.dashboard-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.dashboard-stat-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 18px 22px;
+  border-left: 4px solid #5e35b1;
+  box-shadow: 0 2px 8px rgba(94, 53, 177, 0.08);
+  min-width: 130px;
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-stat-category {
+  border-left-color: #d1c4e9;
+}
+
+.dashboard-stat-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #5e35b1;
+}
+
+.dashboard-stat-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6a5a8a;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(94, 53, 177, 0.08);
+}
+
+.dashboard-empty h2 {
+  font-size: 1.3rem;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.dashboard-empty p {
+  color: #6a5a8a;
+  font-size: 0.95rem;
+}
