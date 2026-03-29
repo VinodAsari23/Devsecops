@@ -1,0 +1,44 @@
+
+Report Summary
+
+┌──────────────────────────┬──────┬─────────────────┬─────────┐
+│          Target          │ Type │ Vulnerabilities │ Secrets │
+├──────────────────────────┼──────┼─────────────────┼─────────┤
+│ backend/requirements.txt │ pip  │        4        │    -    │
+└──────────────────────────┴──────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+For OSS Maintainers: VEX Notice
+--------------------------------
+If you're an OSS maintainer and Trivy has detected vulnerabilities in your project that you believe are not actually exploitable, consider issuing a VEX (Vulnerability Exploitability eXchange) statement.
+VEX allows you to communicate the actual status of vulnerabilities in your project, improving security transparency and reducing false positives for your users.
+Learn more and start using VEX: https://trivy.dev/docs/v0.69/guide/supply-chain/vex/repo#publishing-vex-documents
+
+To disable this notice, set the TRIVY_DISABLE_VEX_NOTICE environment variable.
+
+
+backend/requirements.txt (pip)
+==============================
+Total: 4 (MEDIUM: 1, HIGH: 2, CRITICAL: 1)
+
+┌──────────────────┬────────────────┬──────────┬────────┬───────────────────┬───────────────┬──────────────────────────────────────────────────────────────┐
+│     Library      │ Vulnerability  │ Severity │ Status │ Installed Version │ Fixed Version │                            Title                             │
+├──────────────────┼────────────────┼──────────┼────────┼───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ python-jose      │ CVE-2024-33663 │ CRITICAL │ fixed  │ 3.3.0             │ 3.4.0         │ python-jose: algorithm confusion with OpenSSH ECDSA keys and │
+│                  │                │          │        │                   │               │ other key formats                                            │
+│                  │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-33663                   │
+│                  ├────────────────┼──────────┤        │                   │               ├──────────────────────────────────────────────────────────────┤
+│                  │ CVE-2024-33664 │ MEDIUM   │        │                   │               │ python-jose: allows attackers to cause a denial of service   │
+│                  │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-33664                   │
+├──────────────────┼────────────────┼──────────┤        ├───────────────────┼───────────────┼──────────────────────────────────────────────────────────────┤
+│ python-multipart │ CVE-2024-53981 │ HIGH     │        │ 0.0.12            │ 0.0.18        │ python-multipart: python-multipart has a DoS via deformation │
+│                  │                │          │        │                   │               │ `multipart/form-data` boundary                               │
+│                  │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2024-53981                   │
+│                  ├────────────────┤          │        │                   ├───────────────┼──────────────────────────────────────────────────────────────┤
+│                  │ CVE-2026-24486 │          │        │                   │ 0.0.22        │ python-multipart: Python-Multipart: Arbitrary file write via │
+│                  │                │          │        │                   │               │ path traversal vulnerability                                 │
+│                  │                │          │        │                   │               │ https://avd.aquasec.com/nvd/cve-2026-24486                   │
+└──────────────────┴────────────────┴──────────┴────────┴───────────────────┴───────────────┴──────────────────────────────────────────────────────────────┘

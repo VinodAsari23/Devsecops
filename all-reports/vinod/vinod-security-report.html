@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Research Paper Annotation Tool - Security Analysis Report</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; color: #212529; }
+.header { background: #5e35b1; color: #fff; padding: 32px 40px; }
+.header h1 { font-size: 1.6rem; font-weight: 700; }
+.header p { font-size: 0.9rem; opacity: 0.85; margin-top: 6px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0; }
+.summary-card { background: #fff; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #7c4dff; }
+.summary-card h3 { font-size: 0.8rem; color: #6c757d; text-transform: uppercase; letter-spacing: 0.5px; }
+.summary-card .value { font-size: 1.8rem; font-weight: 700; color: #5e35b1; margin: 8px 0 4px; }
+.summary-card .detail { font-size: 0.82rem; color: #6c757d; }
+.section { background: #fff; border-radius: 10px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 1.1rem; font-weight: 700; color: #5e35b1; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th { background: #5e35b1; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+tr:nth-child(even) { background: #fafafa; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; color: #fff; }
+.badge-critical { background: #d32f2f; }
+.badge-high { background: #e65100; }
+.badge-medium { background: #f9a825; color: #333; }
+.badge-low { background: #1565c0; }
+.badge-pass { background: #2e7d32; }
+.badge-info { background: #9e9e9e; }
+.status-pass { color: #2e7d32; font-weight: 700; }
+.status-warn { color: #e65100; font-weight: 700; }
+pre { background: #f5f5f5; padding: 12px; border-radius: 6px; font-size: 0.8rem; overflow-x: auto; white-space: pre-wrap; word-break: break-all; }
+.footer { text-align: center; padding: 20px; color: #9e9e9e; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Research Paper Annotation Tool - Security Analysis Report</h1>
+  <p>CI/CD Pipeline Security Tool Results -- Generated from GitHub Actions Artifacts</p>
+</div>
+<div class="container">
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>Bandit</h3>
+    <div class="value">1</div>
+    <div class="detail">373 lines scanned</div>
+  </div>
+  <div class="summary-card">
+    <h3>Trivy CVEs</h3>
+    <div class="value">4</div>
+    <div class="detail">1 Critical, 2 High, 1 Medium</div>
+  </div>
+  <div class="summary-card">
+    <h3>Pylint</h3>
+    <div class="value">83</div>
+    <div class="detail">Code quality findings</div>
+  </div>
+  <div class="summary-card">
+    <h3>Flake8</h3>
+    <div class="value">60</div>
+    <div class="detail">Style issues</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Bandit Security Analysis</h2>
+  <p style="margin-bottom:12px;">Scanned 373 lines of Python code. Found 1 finding(s).</p>
+  <table>
+    <tr><th>ID</th><th>Severity</th><th>Confidence</th><th>File</th><th>Line</th><th>Description</th></tr>
+    <tr>
+      <td>B110</td>
+      <td><span class="badge badge-low">LOW</span></td>
+      <td>HIGH</td>
+      <td>app/main.py</td>
+      <td>76</td>
+      <td>Try, Except, Pass detected.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Trivy Vulnerability Scan</h2>
+  <table>
+    <tr><th>Severity</th><th>CVE</th><th>Library</th><th>Installed</th><th>Fixed In</th><th>Description</th></tr>
+    <tr><td><span class="badge badge-critical">CRITICAL</span></td><td>CVE-2024-33663</td><td>python-jose</td><td>3.3.0</td><td>3.4.0</td><td>Algorithm confusion with ECDSA keys</td></tr>
+    <tr><td><span class="badge badge-high">HIGH</span></td><td>CVE-2024-53981</td><td>python-multipart</td><td>0.0.12</td><td>0.0.18</td><td>DoS via deformed multipart boundary</td></tr>
+    <tr><td><span class="badge badge-high">HIGH</span></td><td>CVE-2026-24486</td><td>python-multipart</td><td>0.0.12</td><td>0.0.22</td><td>Path traversal in file upload</td></tr>
+    <tr><td><span class="badge badge-medium">MEDIUM</span></td><td>CVE-2024-33664</td><td>python-jose</td><td>3.3.0</td><td>3.4.0</td><td>DoS via crafted JWK input</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Pylint Code Quality</h2>
+  <p style="margin-bottom:12px;">Found {pylint_count} findings across all modules.</p>
+  <table>
+    <tr><th>Type</th><th>Symbol</th><th>File</th><th>Line</th><th>Message</th></tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>1</td>
+      <td>Line too long (102/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>11</td>
+      <td>Line too long (121/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>28</td>
+      <td>Line too long (166/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>31</td>
+      <td>Line too long (122/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>33</td>
+      <td>Line too long (139/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>34</td>
+      <td>Line too long (109/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>38</td>
+      <td>Line too long (173/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>45</td>
+      <td>Line too long (109/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>46</td>
+      <td>Line too long (120/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>49</td>
+      <td>Line too long (121/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>51</td>
+      <td>Line too long (110/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>55</td>
+      <td>Line too long (107/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>57</td>
+      <td>Line too long (101/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>line-too-long</td>
+      <td>app/main.py</td>
+      <td>61</td>
+      <td>Line too long (140/100)</td>
+    </tr>
+    <tr>
+      <td>convention</td>
+      <td>missing-function-docstring</td>
+      <td>app/main.py</td>
+      <td>16</td>
+      <td>Missing function or method docstring</td>
+    </tr><tr><td colspan="5" style="color:#9e9e9e;">... and 68 more findings</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>Flake8 Style Check</h2><p style="margin-bottom:12px;">Found 60 style issues.</p><pre>app/auth.py:14:1: E302 expected 2 blank lines, found 1
+app/auth.py:17:1: E302 expected 2 blank lines, found 1
+app/auth.py:20:1: E302 expected 2 blank lines, found 1
+app/auth.py:25:1: E302 expected 2 blank lines, found 1
+app/auth.py:25:121: E501 line too long (122 > 120 characters)
+app/config.py:4:1: E302 expected 2 blank lines, found 1
+app/config.py:11:5: E301 expected 1 blank line, found 0
+app/config.py:15:1: E305 expected 2 blank lines after class or function definition, found 1
+app/database.py:18:1: E302 expected 2 blank lines, found 1
+app/main.py:11:121: E501 line too long (121 > 120 characters)
+app/main.py:16:1: E302 expected 2 blank lines, found 1
+app/main.py:28:121: E501 line too long (166 > 120 characters)
+app/main.py:31:121: E501 line too long (122 > 120 characters)
+app/main.py:33:121: E501 line too long (139 > 120 characters)
+app/main.py:38:121: E501 line too long (173 > 120 characters)
+app/main.py:49:121: E501 line too long (121 > 120 characters)
+app/main.py:61:121: E501 line too long (140 > 120 characters)
+app/main.py:71:1: E302 expected 2 blank lines, found 1
+app/main.py:79:1: E302 expected 2 blank lines, found 1
+app/models.py:3:1: F401 'sqlalchemy.Float' imported but unused
+app/models.py:3:1: F401 'sqlalchemy.Boolean' imported but unused
+app/models.py:8:1: E302 expected 2 blank lines, found 1
+app/models.py:12:1: E302 expected 2 blank lines, found 1
+app/models.py:20:1: E302 expected 2 blank lines, found 1
+app/models.py:30:1: E302 expected 2 blank lines, found 1
+app/models.py:39:121: E501 line too long (122 > 120 characters)
+app/models.py:44:1: E302 expected 2 blank lines, found 1
+app/routers/annotations.py:12:1: E302 expected 2 blank lines, found 1
+app/routers/annotations.py:16:1: E302 expected 2 blank lines, found 1
+app/routers/annotations.py:22:1: E302 expected 2 blank lines, found 1
+app/routers/annotations.py:27:1: E302 expected 2 blank lines, found 1
+app/routers/annotations.py:28:121: E501 line too long (132 > 120 characters)
+app/routers/annotations</pre>
+</div>
+
+<div class="section">
+  <h2>Overall Security Posture</h2>
+  <table>
+    <tr><th>Tool</th><th>Findings</th><th>Status</th><th>Action</th></tr>
+    <tr><td>Bandit (Security)</td><td>1 LOW</td><td class="status-pass">PASS</td><td>Accepted - non-critical startup handler</td></tr>
+    <tr><td>Trivy (CVEs)</td><td>4 (1C, 2H, 1M)</td><td class="status-warn">REVIEW</td><td>Upgrade python-jose to PyJWT, update python-multipart</td></tr>
+    <tr><td>Pylint (Quality)</td><td>83</td><td class="status-pass">PASS</td><td>Mostly style and ORM model conventions</td></tr>
+    <tr><td>Flake8 (Style)</td><td>60</td><td class="status-pass">PASS</td><td>Minor formatting, non-blocking</td></tr>
+    <tr><td>OWASP ZAP</td><td>Baseline scan</td><td class="status-pass">PASS</td><td>Executed against live deployment</td></tr>
+  </table>
+</div>
+
+</div>
+<div class="footer">CI/CD Security Analysis Report -- Generated from GitHub Actions Pipeline Artifacts</div>
+</body>
+</html>

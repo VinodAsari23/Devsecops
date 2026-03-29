@@ -19,7 +19,7 @@ def seed_demo_data():
         if db.query(User).filter(User.username == "examiner").first():
             return
         admin = User(username="examiner", email="examiner@nci.ie",
-                     password_hash=hash_password("ResearchTool2024"), role=UserRole.ADMIN)
+                     password_hash=hash_password("Research@Tool2024"), role=UserRole.ADMIN)
         db.add(admin)
         db.flush()
 

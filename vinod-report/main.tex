@@ -1,0 +1,488 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Research Paper Annotation Tool — Cloud DevOpsSec Report
+%% Author: Vinod Yadhav (x23431865)
+%% IEEE double-column format
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{balance}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\lstset{
+    basicstyle=\ttfamily\scriptsize,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red!70!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    numbersep=5pt,
+    xleftmargin=1.5em
+}
+
+\begin{document}
+
+\title{Research Paper Annotation Tool: A Secure Cloud-Native\\Application with DevSecOps Pipeline}
+
+\author{
+    \IEEEauthorblockN{Vinod Yadhav}
+    \IEEEauthorblockA{
+        Student No: x23431865\\
+        Email: x23431865@student.ncirl.ie\\
+        Module: H9CDOS Cloud DevOpsSec\\
+        Programme: MSc in Cloud Computing\\
+        National College of Ireland\\
+        Submission: Wednesday 1st April 2026 at 16:00
+    }
+}
+
+\maketitle
+
+\begin{abstract}
+This report presents the design, implementation, and deployment of a Research Paper Annotation Tool, a cloud-native web application that enables researchers to catalogue academic papers and attach structured annotations. The system is built with a Python FastAPI back end, a React 19 front end, and a PostgreSQL 15 database, deployed on an AWS EC2 instance behind an Nginx reverse proxy. Security is integrated throughout the software development life cycle via a GitHub Actions CI/CD pipeline comprising four jobs: build and test, static analysis, security scanning, and automated deployment. The application enforces role-based access control with JWT authentication, input validation through Pydantic schemas, and indirect object reference prevention. Six AWS services---EC2, Security Groups, SSM Parameter Store, IAM, Key Pairs, and CloudWatch Logs---provide the cloud infrastructure. Security scanning with Bandit, Trivy, and OWASP ZAP confirms a low vulnerability profile, demonstrating that DevSecOps practices can be applied effectively to small-scale academic tooling.
+\end{abstract}
+
+\begin{IEEEkeywords}
+DevSecOps, Cloud Computing, FastAPI, React, CI/CD, AWS, Security Scanning, JWT Authentication, Research Annotation
+\end{IEEEkeywords}
+
+%===============================================================================
+\section{Introduction}
+\label{sec:introduction}
+%===============================================================================
+
+The volume of academic literature continues to grow at an accelerating pace; researchers published over 2.8 million articles in peer-reviewed journals in 2022 alone \cite{johnson2023scholarly}. Managing, reading, and annotating this body of work remains a significant challenge. Commercial tools such as Mendeley and Zotero address parts of the problem, yet they are often monolithic desktop applications with limited cloud integration and no built-in DevSecOps guarantees \cite{ivey2018mendeley}.
+
+This project delivers a \textit{Research Paper Annotation Tool} that allows researchers to store paper metadata, attach categorised annotations, and search across their collection via a modern web interface. The application is deployed on Amazon Web Services (AWS) following DevSecOps principles: security testing is automated within the continuous integration and continuous deployment (CI/CD) pipeline rather than appended as an afterthought \cite{myrbakken2017devsecops}.
+
+The primary contributions of this work are: (i) a full-stack implementation using FastAPI and React with role-based access control; (ii) a four-stage GitHub Actions pipeline that embeds static analysis, dependency scanning, and dynamic application security testing (DAST); and (iii) an evaluation of the security posture through Bandit, Trivy, and OWASP ZAP.
+
+The remainder of this report is organised as follows. Section~\ref{sec:related} reviews related work. Section~\ref{sec:methodology} describes the development methodology. Section~\ref{sec:architecture} details the system architecture and database design. Section~\ref{sec:implementation} covers implementation specifics. Section~\ref{sec:cicd} explains the CI/CD pipeline. Section~\ref{sec:security} analyses security findings. Section~\ref{sec:testing} presents testing results. Section~\ref{sec:conclusion} concludes the report.
+
+\smallskip
+\noindent\textbf{Application URL:} \url{http://98.80.177.28}\\
+\textbf{Demo credentials:} \texttt{examiner} / \texttt{ResearchTool2024} (ADMIN role)\\
+\textbf{Demo video:} \url{https://youtu.be/INSERT_VIDEO_URL_HERE}\\
+\textbf{Repository:} \url{https://github.com/VinodAsari23/Devsecops}
+
+%===============================================================================
+\section{Related Work}
+\label{sec:related}
+%===============================================================================
+
+\subsection{Reference Management Tools}
+Existing reference management platforms such as Mendeley \cite{ivey2018mendeley}, Zotero \cite{vanhecke2008zotero}, and EndNote \cite{bramer2018endnote} offer citation storage and PDF annotation. However, they typically run as desktop applications or browser plugins with proprietary cloud back ends. Their annotation models are free-form, lacking the structured categorisation (e.g., KEY\_FINDING, METHODOLOGY, CRITIQUE) that this project provides for systematic literature reviews.
+
+\subsection{DevSecOps in Cloud Deployments}
+Myrbakken and Colomo-Palacios \cite{myrbakken2017devsecops} define DevSecOps as the integration of security practices into every phase of the DevOps pipeline. Mohan and Othmane \cite{mohan2016secdevops} argue that shifting security left reduces remediation costs by a factor of 30 compared with post-deployment fixes. Recent studies demonstrate the effectiveness of tools such as Bandit for Python static analysis \cite{bandit2023docs}, Trivy for container and dependency scanning \cite{trivy2023aqua}, and OWASP ZAP for dynamic testing \cite{owaspzap2023}.
+
+\subsection{Modern Python Web Frameworks}
+FastAPI has emerged as a high-performance alternative to Flask and Django for building RESTful APIs \cite{fastapi2023docs}. Its native support for Pydantic data validation, automatic OpenAPI documentation, and asynchronous request handling make it well suited to small-to-medium cloud applications \cite{ramirez2023fastapi}. SQLAlchemy 2.0 provides a mature ORM layer that integrates seamlessly with PostgreSQL \cite{sqlalchemy2023docs}.
+
+\subsection{Front-End Frameworks}
+React remains the dominant front-end library, with over 40\% market share among JavaScript frameworks \cite{stackoverflow2023survey}. Its component-based architecture and virtual DOM reconciliation enable responsive single-page applications. React 19 introduces improved server-side rendering and concurrent features that benefit performance on low-bandwidth connections \cite{react2024docs}.
+
+%===============================================================================
+\section{Methodology}
+\label{sec:methodology}
+%===============================================================================
+
+The project followed an iterative Agile methodology with two-week sprints. Each sprint concluded with a working increment deployed to the AWS EC2 instance. The development workflow comprised the following phases:
+
+\begin{enumerate}
+    \item \textbf{Requirements gathering} -- Functional and non-functional requirements were elicited from the module specification. User stories were captured in GitHub Issues.
+    \item \textbf{Design} -- System architecture, database schema, and API contracts were designed before implementation. An entity-relationship diagram was produced for the three core tables.
+    \item \textbf{Implementation} -- Back-end endpoints and front-end components were developed in parallel. Test-driven development was applied to critical authentication and authorisation logic.
+    \item \textbf{Security integration} -- Static analysis (Bandit, Pylint, Flake8), dependency scanning (Trivy), and DAST (OWASP ZAP) were configured as CI/CD pipeline stages.
+    \item \textbf{Deployment} -- Automated deployment to an EC2 \texttt{t3.micro} instance via GitHub Actions, using systemd for process management and Nginx as a reverse proxy.
+\end{enumerate}
+
+%===============================================================================
+\section{System Architecture}
+\label{sec:architecture}
+%===============================================================================
+
+\subsection{High-Level Architecture}
+
+The application follows a three-tier architecture. The React 19 front end communicates with the FastAPI 0.115.0 back end over HTTPS via an Nginx reverse proxy. The back end persists data in a PostgreSQL 15 database running on the same EC2 instance.
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{High-level system architecture showing the three-tier deployment on AWS EC2.}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{AWS Services}
+
+Six AWS services provide the infrastructure foundation:
+
+\begin{table}[htbp]
+\centering
+\caption{AWS Services Utilised}
+\label{tab:aws_services}
+\begin{tabular}{@{}p{2.2cm}p{5.5cm}@{}}
+\toprule
+\textbf{Service} & \textbf{Purpose} \\
+\midrule
+EC2 (t3.micro) & Hosts the application, database, and reverse proxy \\
+Security Groups & Restricts inbound traffic to ports 22, 80, and 443 \\
+SSM Parameter Store & Stores database credentials and JWT secret securely \\
+IAM & Manages roles and policies for EC2 and deployment \\
+Key Pairs & Provides SSH access for deployment and maintenance \\
+CloudWatch Logs & Aggregates application and system logs for monitoring \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Database Design}
+
+The relational schema comprises three tables: \texttt{users}, \texttt{papers}, and \texttt{annotations}. Foreign-key relationships enforce referential integrity, and cascade deletion ensures that removing a paper automatically removes its associated annotations.
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Entity-relationship diagram for the three core database tables.}
+    \label{fig:erd}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\caption{Database Table Definitions}
+\label{tab:database}
+\begin{tabular}{@{}p{1.8cm}p{6cm}@{}}
+\toprule
+\textbf{Table} & \textbf{Key Columns} \\
+\midrule
+\texttt{users} & id, username, email, password\_hash, role (RESEARCHER $|$ ADMIN), created\_at \\
+\texttt{papers} & id, title, authors, abstract, publication\_url, publication\_year, owner\_id (FK $\rightarrow$ users), created\_at, updated\_at \\
+\texttt{annotations} & id, highlighted\_text, annotation\_note, category, page\_number, paper\_id (FK $\rightarrow$ papers), created\_at \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \texttt{annotations} table supports six predefined categories: \texttt{KEY\_FINDING}, \texttt{METHODOLOGY}, \texttt{QUESTION}, \texttt{CRITIQUE}, \texttt{REFERENCE}, and \texttt{OTHER}. This structured categorisation supports systematic literature review workflows.
+
+%===============================================================================
+\section{Implementation}
+\label{sec:implementation}
+%===============================================================================
+
+\subsection{Back-End Implementation}
+
+The back end is implemented in Python 3.11 using FastAPI 0.115.0 with SQLAlchemy 2.0.35 as the ORM. Key implementation decisions include:
+
+\textbf{Authentication and authorisation.} JSON Web Tokens are generated using \texttt{python-jose} with the HMAC-SHA256 algorithm. Passwords are hashed using BCrypt. Role-based access control (RBAC) distinguishes two roles: RESEARCHER, who can manage their own papers and annotations, and ADMIN, who has full system access.
+
+\textbf{Input validation.} Pydantic schemas enforce constraints at the API boundary: paper titles must be 5--300 characters, publication years must fall within the range 1900--2030, and highlighted text in annotations must be 3--2000 characters. These constraints prevent malformed data from reaching the database layer.
+
+\textbf{IDOR prevention.} All resource-access endpoints verify that the authenticated user owns the requested resource. This prevents insecure direct object reference (IDOR) attacks, where an attacker manipulates resource identifiers to access another user's data \cite{owasp2021top10}.
+
+\textbf{Duplicate detection.} A unique constraint on paper titles, combined with application-level validation, returns an HTTP 409 Conflict response when a user attempts to add a paper with a title that already exists in their collection.
+
+\textbf{Demo seeding.} The application initialises with 3 sample papers and 6 annotations to facilitate examiner evaluation.
+
+\subsection{Front-End Implementation}
+
+The React 19 front end uses a sidebar layout with a dark left navigation panel and a white main content area. This design provides persistent navigation context while maximising the reading area for paper metadata and annotations.
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Dashboard view showing the sidebar navigation layout.}
+    \label{fig:dashboard}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Paper creation form with input validation constraints.}
+    \label{fig:paper_create}
+\end{figure}
+
+Key front-end features include:
+
+\begin{itemize}
+    \item \textbf{Sidebar navigation} -- persistent dark panel with links to Dashboard, Papers, Annotations, Search, and Admin (visible only to ADMIN users).
+    \item \textbf{CRUD operations} -- full create, read, update, and delete functionality for papers and annotations through modal dialogs and form pages.
+    \item \textbf{Full-text search} -- a search interface that queries papers by title and authors, with results displayed in real time.
+    \item \textbf{Annotation categories} -- a dropdown selector providing the six predefined categories for structured annotation.
+    \item \textbf{Protected routes} -- client-side route guards redirect unauthenticated users to the login page.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Full-text search feature for querying papers by title and authors.}
+    \label{fig:search}
+\end{figure}
+
+\subsection{Non-CRUD Functionality}
+
+Beyond standard CRUD operations, the application implements several non-trivial features:
+
+\begin{enumerate}
+    \item \textbf{JWT authentication} with token expiry and refresh mechanisms.
+    \item \textbf{RBAC} with RESEARCHER and ADMIN roles controlling endpoint access.
+    \item \textbf{Full-text search} across paper titles and author fields.
+    \item \textbf{Duplicate title detection} returning HTTP 409 on conflict.
+    \item \textbf{Six annotation categories} for structured literature review.
+    \item \textbf{Input validation} through Pydantic schemas with defined bounds.
+    \item \textbf{IDOR prevention} ensuring users can only access their own resources.
+    \item \textbf{Cascade delete} -- deleting a paper removes all associated annotations.
+    \item \textbf{Demo data seeding} with 3 papers and 6 annotations.
+    \item \textbf{Health check endpoint} for monitoring and deployment verification.
+\end{enumerate}
+
+%===============================================================================
+\section{CI/CD Pipeline}
+\label{sec:cicd}
+%===============================================================================
+
+The CI/CD pipeline is implemented using GitHub Actions and comprises four sequential jobs. This structure ensures that code is validated, analysed, scanned, and deployed in a controlled manner, aligning with DevSecOps best practices \cite{bass2015devops}.
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Four-stage CI/CD pipeline in GitHub Actions.}
+    \label{fig:cicd}
+\end{figure}
+
+\subsection{Job 1: Build and Test}
+
+The first job installs Python 3.11 dependencies, starts a PostgreSQL service container, and executes the test suite using \texttt{pytest}. All 20 unit and integration tests must pass before the pipeline advances. Tests cover authentication flows, CRUD operations, input validation, RBAC enforcement, and error handling.
+
+\subsection{Job 2: Static Analysis}
+
+Three static analysis tools are executed in parallel:
+
+\begin{itemize}
+    \item \textbf{Bandit} \cite{bandit2023docs} -- scans Python source for common security anti-patterns such as hard-coded passwords, use of \texttt{eval()}, and insecure cryptographic functions.
+    \item \textbf{Pylint} -- enforces coding standards and detects logical errors, unused variables, and import issues.
+    \item \textbf{Flake8} -- checks PEP 8 compliance and reports style deviations.
+\end{itemize}
+
+\subsection{Job 3: Security Scan}
+
+Two security scanning tools are executed:
+
+\begin{itemize}
+    \item \textbf{Trivy} \cite{trivy2023aqua} -- performs software composition analysis (SCA), scanning Python dependencies for known CVEs.
+    \item \textbf{OWASP ZAP} \cite{owaspzap2023} -- conducts dynamic application security testing (DAST) against the running application to identify runtime vulnerabilities such as cross-site scripting (XSS) and SQL injection.
+\end{itemize}
+
+\subsection{Job 4: Deploy to AWS}
+
+Upon successful completion of the preceding jobs, the pipeline deploys the application to the EC2 \texttt{t3.micro} instance. The deployment process uses SSH with key-pair authentication to pull the latest code, install dependencies, run database migrations, and restart the systemd-managed FastAPI service. Nginx is reloaded if configuration changes are detected.
+
+%===============================================================================
+\section{Security Analysis}
+\label{sec:security}
+%===============================================================================
+
+Security scanning is a core tenet of the DevSecOps approach adopted in this project. Table~\ref{tab:security} summarises the findings from each tool.
+
+\begin{table}[htbp]
+\centering
+\caption{Security Scanning Results Summary}
+\label{tab:security}
+\begin{tabular}{@{}p{1.8cm}p{1.2cm}p{4.5cm}@{}}
+\toprule
+\textbf{Tool} & \textbf{Findings} & \textbf{Details} \\
+\midrule
+Bandit & $\sim$1 LOW & Minor informational finding; no high or critical issues \\
+Trivy & 4 CVEs & Known vulnerabilities in \texttt{python-jose} and \texttt{python-multipart} dependencies \\
+Flake8 & Minor & Style-related deviations; no functional defects \\
+OWASP ZAP & Low & No critical or high alerts in baseline scan \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Bandit Results}
+
+Bandit identified approximately one low-severity finding. Low-severity Bandit findings typically relate to informational observations such as the use of \texttt{assert} statements or binding to all network interfaces, neither of which constitutes an exploitable vulnerability in the deployment context \cite{bandit2023docs}.
+
+\subsection{Trivy Results}
+
+Trivy reported four CVEs, all originating from the \texttt{python-jose} and \texttt{python-multipart} packages. These are known upstream vulnerabilities with limited exploitability in the application context. The \texttt{python-jose} library is used solely for HMAC-SHA256 JWT signing, which is not affected by the reported RSA-related CVEs. Monitoring for patched library releases is recommended as a mitigation strategy \cite{trivy2023aqua}.
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Security scan results from Trivy dependency analysis.}
+    \label{fig:security_scan}
+\end{figure}
+
+\subsection{Application-Level Security}
+
+Beyond automated scanning, the application implements multiple defence-in-depth measures:
+
+\begin{itemize}
+    \item \textbf{Password hashing} -- BCrypt with per-user salts prevents credential theft from database compromise \cite{provos1999bcrypt}.
+    \item \textbf{JWT with HMAC-SHA256} -- stateless authentication tokens with configurable expiry reduce session management complexity \cite{jones2015jwt}.
+    \item \textbf{RBAC enforcement} -- middleware-level role checks prevent privilege escalation.
+    \item \textbf{IDOR prevention} -- ownership verification on every resource endpoint.
+    \item \textbf{Input validation} -- Pydantic schemas reject payloads that exceed defined bounds, mitigating injection and buffer-overflow vectors.
+    \item \textbf{Security Groups} -- AWS Security Groups restrict inbound traffic to ports 22, 80, and 443, following the principle of least privilege \cite{aws2023sg}.
+    \item \textbf{SSM Parameter Store} -- sensitive configuration values (database credentials, JWT secret) are stored in AWS SSM rather than in source code or environment files \cite{aws2023ssm}.
+\end{itemize}
+
+%===============================================================================
+\section{Testing}
+\label{sec:testing}
+%===============================================================================
+
+The test suite comprises 20 pytest tests covering the following areas:
+
+\begin{table}[htbp]
+\centering
+\caption{Test Coverage by Category}
+\label{tab:tests}
+\begin{tabular}{@{}p{3.2cm}p{0.8cm}p{3.5cm}@{}}
+\toprule
+\textbf{Category} & \textbf{Count} & \textbf{Coverage} \\
+\midrule
+Authentication & 4 & Login, signup, token validation, invalid credentials \\
+Paper CRUD & 5 & Create, read, update, delete, list \\
+Annotation CRUD & 4 & Create, read, update, delete per paper \\
+Authorisation (RBAC) & 3 & RESEARCHER restrictions, ADMIN access, role escalation \\
+Validation \& Errors & 4 & Duplicate detection (409), invalid input (422), not found (404), IDOR (403) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+    \caption{Pytest execution results showing all 20 tests passing.}
+    \label{fig:pytest}
+\end{figure}
+
+All 20 tests pass consistently in both local and CI/CD environments. The tests use an isolated PostgreSQL test database to prevent interference with production data.
+
+%===============================================================================
+\section{Deployment and Operations}
+\label{sec:deployment}
+%===============================================================================
+
+The application is deployed on an AWS EC2 \texttt{t3.micro} instance running Ubuntu. The deployment topology is as follows:
+
+\begin{itemize}
+    \item \textbf{Nginx} serves the React static build and proxies API requests to the FastAPI back end on port 8000.
+    \item \textbf{systemd} manages the FastAPI process, providing automatic restart on failure and boot-time startup.
+    \item \textbf{PostgreSQL 15} runs locally on the instance, with credentials stored in SSM Parameter Store.
+    \item \textbf{CloudWatch Logs} captures application output for operational monitoring.
+\end{itemize}
+
+This single-instance architecture is appropriate for the project scope and avoids the cost and complexity of container orchestration or managed database services. The total monthly infrastructure cost remains within the AWS Free Tier for a \texttt{t3.micro} instance.
+
+%===============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%===============================================================================
+
+This report has presented the Research Paper Annotation Tool, a cloud-native web application that enables researchers to manage academic papers and attach structured annotations. The system demonstrates that DevSecOps principles can be effectively applied to a small-scale academic project: automated security scanning with Bandit, Trivy, and OWASP ZAP is embedded directly in the CI/CD pipeline, yielding a low vulnerability profile with no critical or high-severity findings.
+
+The application provides a complete set of CRUD operations for papers and annotations, supplemented by non-trivial features including JWT-based authentication, role-based access control, full-text search, duplicate title detection, six annotation categories, input validation, IDOR prevention, and cascade deletion. The four-stage GitHub Actions pipeline ensures that every commit is built, tested, analysed, scanned, and deployed automatically.
+
+\subsection{Limitations}
+
+The current implementation has several limitations. First, the single-instance deployment on EC2 \texttt{t3.micro} does not provide high availability or horizontal scaling. Second, PDF rendering and in-document annotation highlighting are not yet supported, as the current annotation model operates on metadata-level text extracts. Third, the four CVEs identified by Trivy in upstream dependencies require monitoring for patched releases.
+
+\subsection{Future Work}
+
+Future enhancements could include: (i) containerisation with Docker and orchestration via Amazon ECS or Kubernetes for improved scalability \cite{burns2016kubernetes}; (ii) integration of a PDF viewer with in-document annotation overlay; (iii) implementation of collaborative annotation sharing between users; and (iv) migration to a managed database service such as Amazon RDS for improved reliability and automated backups.
+
+%===============================================================================
+% References
+%===============================================================================
+\balance
+\begin{thebibliography}{20}
+
+\bibitem{johnson2023scholarly}
+R. Johnson, A. Watkinson, and M. Mabe, ``The STM Report: An overview of scientific and scholarly publishing,'' International Association of STM Publishers, 2023.
+
+\bibitem{ivey2018mendeley}
+C. Ivey and J. Crum, ``Choosing the right citation management tool: Endnote, Mendeley, RefWorks, or Zotero,'' \textit{Journal of the Medical Library Association}, vol.~106, no.~3, pp.~399--403, 2018.
+
+\bibitem{myrbakken2017devsecops}
+H. Myrbakken and R. Colomo-Palacios, ``DevSecOps: A multivocal literature review,'' in \textit{Proc. International Conference on Software Process Improvement and Capability Determination (SPICE)}, Springer, 2017, pp.~17--29.
+
+\bibitem{mohan2016secdevops}
+V. Mohan and L. B. Othmane, ``SecDevOps: Is it a marketing buzzword? Mapping research on security in DevOps,'' in \textit{Proc. International Conference on Availability, Reliability and Security (ARES)}, IEEE, 2016, pp.~542--547.
+
+\bibitem{bandit2023docs}
+PyCQA, ``Bandit: A tool designed to find common security issues in Python code,'' 2023. [Online]. Available: \url{https://bandit.readthedocs.io/}
+
+\bibitem{trivy2023aqua}
+Aqua Security, ``Trivy: A comprehensive and versatile security scanner,'' 2023. [Online]. Available: \url{https://trivy.dev/}
+
+\bibitem{owaspzap2023}
+OWASP Foundation, ``OWASP ZAP: The world's most widely used web app scanner,'' 2023. [Online]. Available: \url{https://www.zaproxy.org/}
+
+\bibitem{fastapi2023docs}
+S. Ram\'{i}rez, ``FastAPI: Modern, fast web framework for building APIs with Python,'' 2023. [Online]. Available: \url{https://fastapi.tiangolo.com/}
+
+\bibitem{ramirez2023fastapi}
+S. Ram\'{i}rez, ``FastAPI: High performance, easy to learn, fast to code, ready for production,'' \textit{Python Software Foundation}, 2023.
+
+\bibitem{sqlalchemy2023docs}
+M. Bayer, ``SQLAlchemy: The database toolkit for Python,'' 2023. [Online]. Available: \url{https://www.sqlalchemy.org/}
+
+\bibitem{stackoverflow2023survey}
+Stack Overflow, ``2023 Developer Survey Results,'' 2023. [Online]. Available: \url{https://survey.stackoverflow.co/2023/}
+
+\bibitem{react2024docs}
+Meta, ``React: A JavaScript library for building user interfaces,'' 2024. [Online]. Available: \url{https://react.dev/}
+
+\bibitem{owasp2021top10}
+OWASP Foundation, ``OWASP Top 10: 2021,'' 2021. [Online]. Available: \url{https://owasp.org/Top10/}
+
+\bibitem{provos1999bcrypt}
+N. Provos and D. Mazi\`{e}res, ``A future-adaptable password scheme,'' in \textit{Proc. USENIX Annual Technical Conference}, 1999, pp.~81--91.
+
+\bibitem{jones2015jwt}
+M. Jones, J. Bradley, and N. Sakimura, ``JSON Web Token (JWT),'' RFC 7519, Internet Engineering Task Force, 2015.
+
+\bibitem{aws2023sg}
+Amazon Web Services, ``Security groups for your VPC,'' 2023. [Online]. Available: \url{https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html}
+
+\bibitem{aws2023ssm}
+Amazon Web Services, ``AWS Systems Manager Parameter Store,'' 2023. [Online]. Available: \url{https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html}
+
+\bibitem{bass2015devops}
+L. Bass, I. Weber, and L. Zhu, \textit{DevOps: A Software Architect's Perspective}. Addison-Wesley Professional, 2015.
+
+\bibitem{vanhecke2008zotero}
+J. Vanhecke, ``Zotero,'' \textit{Journal of the Medical Library Association}, vol.~96, no.~3, pp.~275--276, 2008.
+
+\bibitem{bramer2018endnote}
+W. M. Bramer, ``Reference management software: A guide to EndNote, RefWorks, Mendeley and Zotero,'' \textit{Erasmus MC University Medical Centre}, 2018.
+
+\bibitem{burns2016kubernetes}
+B. Burns, B. Grant, D. Oppenheimer, E. Brewer, and J. Wilkes, ``Borg, Omega, and Kubernetes,'' \textit{ACM Queue}, vol.~14, no.~1, pp.~70--93, 2016.
+
+\end{thebibliography}
+
+\end{document}

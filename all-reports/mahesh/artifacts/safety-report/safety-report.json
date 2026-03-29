@@ -1,0 +1,2065 @@
+
+
++===========================================================================================================================================================================================+
+
+
+DEPRECATED: this command (`check`) has been DEPRECATED, and will be unsupported beyond 01 June 2024.
+
+
+We highly encourage switching to the new `scan` command which is easier to use, more powerful, and can be set up to mimic the deprecated command if required.
+
+
++===========================================================================================================================================================================================+
+
+
+{
+    "report_meta": {
+        "scan_target": "environment",
+        "scanned": [
+            "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages"
+        ],
+        "scanned_full_path": [
+            "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages"
+        ],
+        "target_languages": [
+            "python"
+        ],
+        "policy_file": null,
+        "policy_file_source": "local",
+        "audit_and_monitor": false,
+        "api_key": false,
+        "account": "",
+        "local_database_path": null,
+        "safety_version": "3.7.0",
+        "timestamp": "2026-03-28 14:09:33",
+        "packages_found": 81,
+        "vulnerabilities_found": 9,
+        "vulnerabilities_ignored": 0,
+        "remediations_recommended": 0,
+        "telemetry": {
+            "safety_options": {
+                "output": {
+                    "--output": 1
+                }
+            },
+            "safety_version": "3.7.0",
+            "safety_source": "cli",
+            "os_type": "Linux",
+            "os_release": "6.17.0-1008-azure",
+            "os_description": "Linux-6.17.0-1008-azure-x86_64-with-glibc2.39",
+            "python_version": "3.11.15",
+            "safety_command": "check"
+        },
+        "git": {
+            "branch": "main",
+            "tag": "",
+            "commit": "9bf77c729905d08cdd7b82b75471027b778eb894",
+            "dirty": "False",
+            "origin": "https://github.com/purremahesh290-sudo/devops"
+        },
+        "project": null,
+        "json_version": "1.1",
+        "remediations_attempted": 0,
+        "remediations_completed": 0,
+        "remediation_mode": "NON_INTERACTIVE"
+    },
+    "scanned_packages": {
+        "iniconfig": {
+            "name": "iniconfig",
+            "version": "2.3.0",
+            "requirements": [
+                {
+                    "raw": "iniconfig==2.3.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "iniconfig",
+                    "specifier": "==2.3.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/iniconfig-2.3.0.dist-info"
+                }
+            ]
+        },
+        "greenlet": {
+            "name": "greenlet",
+            "version": "3.3.2",
+            "requirements": [
+                {
+                    "raw": "greenlet==3.3.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "greenlet",
+                    "specifier": "==3.3.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/greenlet-3.3.2.dist-info"
+                }
+            ]
+        },
+        "dnspython": {
+            "name": "dnspython",
+            "version": "2.8.0",
+            "requirements": [
+                {
+                    "raw": "dnspython==2.8.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "dnspython",
+                    "specifier": "==2.8.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/dnspython-2.8.0.dist-info"
+                }
+            ]
+        },
+        "Jinja2": {
+            "name": "Jinja2",
+            "version": "3.1.6",
+            "requirements": [
+                {
+                    "raw": "Jinja2==3.1.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "Jinja2",
+                    "specifier": "==3.1.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/jinja2-3.1.6.dist-info"
+                }
+            ]
+        },
+        "mdurl": {
+            "name": "mdurl",
+            "version": "0.1.2",
+            "requirements": [
+                {
+                    "raw": "mdurl==0.1.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "mdurl",
+                    "specifier": "==0.1.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/mdurl-0.1.2.dist-info"
+                }
+            ]
+        },
+        "httptools": {
+            "name": "httptools",
+            "version": "0.7.1",
+            "requirements": [
+                {
+                    "raw": "httptools==0.7.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "httptools",
+                    "specifier": "==0.7.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/httptools-0.7.1.dist-info"
+                }
+            ]
+        },
+        "SQLAlchemy": {
+            "name": "SQLAlchemy",
+            "version": "2.0.35",
+            "requirements": [
+                {
+                    "raw": "SQLAlchemy==2.0.35",
+                    "extras": [],
+                    "marker": null,
+                    "name": "SQLAlchemy",
+                    "specifier": "==2.0.35",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/SQLAlchemy-2.0.35.dist-info"
+                }
+            ]
+        },
+        "tenacity": {
+            "name": "tenacity",
+            "version": "9.1.4",
+            "requirements": [
+                {
+                    "raw": "tenacity==9.1.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "tenacity",
+                    "specifier": "==9.1.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tenacity-9.1.4.dist-info"
+                }
+            ]
+        },
+        "python-dotenv": {
+            "name": "python-dotenv",
+            "version": "1.2.2",
+            "requirements": [
+                {
+                    "raw": "python-dotenv==1.2.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-dotenv",
+                    "specifier": "==1.2.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_dotenv-1.2.2.dist-info"
+                }
+            ]
+        },
+        "tqdm": {
+            "name": "tqdm",
+            "version": "4.67.3",
+            "requirements": [
+                {
+                    "raw": "tqdm==4.67.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "tqdm",
+                    "specifier": "==4.67.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tqdm-4.67.3.dist-info"
+                }
+            ]
+        },
+        "pytest-cov": {
+            "name": "pytest-cov",
+            "version": "5.0.0",
+            "requirements": [
+                {
+                    "raw": "pytest-cov==5.0.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pytest-cov",
+                    "specifier": "==5.0.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pytest_cov-5.0.0.dist-info"
+                }
+            ]
+        },
+        "mccabe": {
+            "name": "mccabe",
+            "version": "0.7.0",
+            "requirements": [
+                {
+                    "raw": "mccabe==0.7.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "mccabe",
+                    "specifier": "==0.7.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/mccabe-0.7.0.dist-info"
+                }
+            ]
+        },
+        "dparse": {
+            "name": "dparse",
+            "version": "0.6.4",
+            "requirements": [
+                {
+                    "raw": "dparse==0.6.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "dparse",
+                    "specifier": "==0.6.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/dparse-0.6.4.dist-info"
+                }
+            ]
+        },
+        "markdown-it-py": {
+            "name": "markdown-it-py",
+            "version": "4.0.0",
+            "requirements": [
+                {
+                    "raw": "markdown-it-py==4.0.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "markdown-it-py",
+                    "specifier": "==4.0.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/markdown_it_py-4.0.0.dist-info"
+                }
+            ]
+        },
+        "ecdsa": {
+            "name": "ecdsa",
+            "version": "0.19.2",
+            "requirements": [
+                {
+                    "raw": "ecdsa==0.19.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "ecdsa",
+                    "specifier": "==0.19.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ecdsa-0.19.2.dist-info"
+                }
+            ]
+        },
+        "marshmallow": {
+            "name": "marshmallow",
+            "version": "4.2.3",
+            "requirements": [
+                {
+                    "raw": "marshmallow==4.2.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "marshmallow",
+                    "specifier": "==4.2.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/marshmallow-4.2.3.dist-info"
+                }
+            ]
+        },
+        "annotated-doc": {
+            "name": "annotated-doc",
+            "version": "0.0.4",
+            "requirements": [
+                {
+                    "raw": "annotated-doc==0.0.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "annotated-doc",
+                    "specifier": "==0.0.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/annotated_doc-0.0.4.dist-info"
+                }
+            ]
+        },
+        "python-multipart": {
+            "name": "python-multipart",
+            "version": "0.0.12",
+            "requirements": [
+                {
+                    "raw": "python-multipart==0.0.12",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-multipart",
+                    "specifier": "==0.0.12",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_multipart-0.0.12.dist-info"
+                }
+            ]
+        },
+        "httpx": {
+            "name": "httpx",
+            "version": "0.27.2",
+            "requirements": [
+                {
+                    "raw": "httpx==0.27.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "httpx",
+                    "specifier": "==0.27.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/httpx-0.27.2.dist-info"
+                }
+            ]
+        },
+        "shellingham": {
+            "name": "shellingham",
+            "version": "1.5.4",
+            "requirements": [
+                {
+                    "raw": "shellingham==1.5.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "shellingham",
+                    "specifier": "==1.5.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/shellingham-1.5.4.dist-info"
+                }
+            ]
+        },
+        "cryptography": {
+            "name": "cryptography",
+            "version": "46.0.6",
+            "requirements": [
+                {
+                    "raw": "cryptography==46.0.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "cryptography",
+                    "specifier": "==46.0.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/cryptography-46.0.6.dist-info"
+                }
+            ]
+        },
+        "pylint": {
+            "name": "pylint",
+            "version": "3.3.1",
+            "requirements": [
+                {
+                    "raw": "pylint==3.3.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pylint",
+                    "specifier": "==3.3.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pylint-3.3.1.dist-info"
+                }
+            ]
+        },
+        "email_validator": {
+            "name": "email_validator",
+            "version": "2.2.0",
+            "requirements": [
+                {
+                    "raw": "email_validator==2.2.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "email_validator",
+                    "specifier": "==2.2.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/email_validator-2.2.0.dist-info"
+                }
+            ]
+        },
+        "click": {
+            "name": "click",
+            "version": "8.3.1",
+            "requirements": [
+                {
+                    "raw": "click==8.3.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "click",
+                    "specifier": "==8.3.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/click-8.3.1.dist-info"
+                }
+            ]
+        },
+        "astroid": {
+            "name": "astroid",
+            "version": "3.3.11",
+            "requirements": [
+                {
+                    "raw": "astroid==3.3.11",
+                    "extras": [],
+                    "marker": null,
+                    "name": "astroid",
+                    "specifier": "==3.3.11",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/astroid-3.3.11.dist-info"
+                }
+            ]
+        },
+        "safety-schemas": {
+            "name": "safety-schemas",
+            "version": "0.0.16",
+            "requirements": [
+                {
+                    "raw": "safety-schemas==0.0.16",
+                    "extras": [],
+                    "marker": null,
+                    "name": "safety-schemas",
+                    "specifier": "==0.0.16",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/safety_schemas-0.0.16.dist-info"
+                }
+            ]
+        },
+        "pydantic-settings": {
+            "name": "pydantic-settings",
+            "version": "2.5.2",
+            "requirements": [
+                {
+                    "raw": "pydantic-settings==2.5.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pydantic-settings",
+                    "specifier": "==2.5.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pydantic_settings-2.5.2.dist-info"
+                }
+            ]
+        },
+        "six": {
+            "name": "six",
+            "version": "1.17.0",
+            "requirements": [
+                {
+                    "raw": "six==1.17.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "six",
+                    "specifier": "==1.17.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/six-1.17.0.dist-info"
+                }
+            ]
+        },
+        "pydantic_core": {
+            "name": "pydantic_core",
+            "version": "2.23.4",
+            "requirements": [
+                {
+                    "raw": "pydantic_core==2.23.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pydantic_core",
+                    "specifier": "==2.23.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pydantic_core-2.23.4.dist-info"
+                }
+            ]
+        },
+        "isort": {
+            "name": "isort",
+            "version": "5.13.2",
+            "requirements": [
+                {
+                    "raw": "isort==5.13.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "isort",
+                    "specifier": "==5.13.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/isort-5.13.2.dist-info"
+                }
+            ]
+        },
+        "bandit": {
+            "name": "bandit",
+            "version": "1.7.10",
+            "requirements": [
+                {
+                    "raw": "bandit==1.7.10",
+                    "extras": [],
+                    "marker": null,
+                    "name": "bandit",
+                    "specifier": "==1.7.10",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/bandit-1.7.10.dist-info"
+                }
+            ]
+        },
+        "rsa": {
+            "name": "rsa",
+            "version": "4.9.1",
+            "requirements": [
+                {
+                    "raw": "rsa==4.9.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "rsa",
+                    "specifier": "==4.9.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/rsa-4.9.1.dist-info"
+                }
+            ]
+        },
+        "packaging": {
+            "name": "packaging",
+            "version": "26.0",
+            "requirements": [
+                {
+                    "raw": "packaging==26.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "packaging",
+                    "specifier": "==26.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/packaging-26.0.dist-info"
+                }
+            ]
+        },
+        "filelock": {
+            "name": "filelock",
+            "version": "3.25.2",
+            "requirements": [
+                {
+                    "raw": "filelock==3.25.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "filelock",
+                    "specifier": "==3.25.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/filelock-3.25.2.dist-info"
+                }
+            ]
+        },
+        "rich": {
+            "name": "rich",
+            "version": "14.3.3",
+            "requirements": [
+                {
+                    "raw": "rich==14.3.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "rich",
+                    "specifier": "==14.3.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/rich-14.3.3.dist-info"
+                }
+            ]
+        },
+        "Pygments": {
+            "name": "Pygments",
+            "version": "2.19.2",
+            "requirements": [
+                {
+                    "raw": "Pygments==2.19.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "Pygments",
+                    "specifier": "==2.19.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pygments-2.19.2.dist-info"
+                }
+            ]
+        },
+        "pluggy": {
+            "name": "pluggy",
+            "version": "1.6.0",
+            "requirements": [
+                {
+                    "raw": "pluggy==1.6.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pluggy",
+                    "specifier": "==1.6.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pluggy-1.6.0.dist-info"
+                }
+            ]
+        },
+        "pycparser": {
+            "name": "pycparser",
+            "version": "3.0",
+            "requirements": [
+                {
+                    "raw": "pycparser==3.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pycparser",
+                    "specifier": "==3.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pycparser-3.0.dist-info"
+                }
+            ]
+        },
+        "pytest": {
+            "name": "pytest",
+            "version": "8.3.3",
+            "requirements": [
+                {
+                    "raw": "pytest==8.3.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pytest",
+                    "specifier": "==8.3.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pytest-8.3.3.dist-info"
+                }
+            ]
+        },
+        "certifi": {
+            "name": "certifi",
+            "version": "2026.2.25",
+            "requirements": [
+                {
+                    "raw": "certifi==2026.2.25",
+                    "extras": [],
+                    "marker": null,
+                    "name": "certifi",
+                    "specifier": "==2026.2.25",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/certifi-2026.2.25.dist-info"
+                }
+            ]
+        },
+        "websockets": {
+            "name": "websockets",
+            "version": "16.0",
+            "requirements": [
+                {
+                    "raw": "websockets==16.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "websockets",
+                    "specifier": "==16.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/websockets-16.0.dist-info"
+                }
+            ]
+        },
+        "starlette": {
+            "name": "starlette",
+            "version": "0.38.6",
+            "requirements": [
+                {
+                    "raw": "starlette==0.38.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "starlette",
+                    "specifier": "==0.38.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+                }
+            ]
+        },
+        "dill": {
+            "name": "dill",
+            "version": "0.4.1",
+            "requirements": [
+                {
+                    "raw": "dill==0.4.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "dill",
+                    "specifier": "==0.4.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/dill-0.4.1.dist-info"
+                }
+            ]
+        },
+        "bcrypt": {
+            "name": "bcrypt",
+            "version": "4.0.1",
+            "requirements": [
+                {
+                    "raw": "bcrypt==4.0.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "bcrypt",
+                    "specifier": "==4.0.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/bcrypt-4.0.1.dist-info"
+                }
+            ]
+        },
+        "requests": {
+            "name": "requests",
+            "version": "2.33.0",
+            "requirements": [
+                {
+                    "raw": "requests==2.33.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "requests",
+                    "specifier": "==2.33.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/requests-2.33.0.dist-info"
+                }
+            ]
+        },
+        "safety": {
+            "name": "safety",
+            "version": "3.7.0",
+            "requirements": [
+                {
+                    "raw": "safety==3.7.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "safety",
+                    "specifier": "==3.7.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/safety-3.7.0.dist-info"
+                }
+            ]
+        },
+        "psycopg2-binary": {
+            "name": "psycopg2-binary",
+            "version": "2.9.9",
+            "requirements": [
+                {
+                    "raw": "psycopg2-binary==2.9.9",
+                    "extras": [],
+                    "marker": null,
+                    "name": "psycopg2-binary",
+                    "specifier": "==2.9.9",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/psycopg2_binary-2.9.9.dist-info"
+                }
+            ]
+        },
+        "joblib": {
+            "name": "joblib",
+            "version": "1.5.3",
+            "requirements": [
+                {
+                    "raw": "joblib==1.5.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "joblib",
+                    "specifier": "==1.5.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/joblib-1.5.3.dist-info"
+                }
+            ]
+        },
+        "python-jose": {
+            "name": "python-jose",
+            "version": "3.3.0",
+            "requirements": [
+                {
+                    "raw": "python-jose==3.3.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-jose",
+                    "specifier": "==3.3.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_jose-3.3.0.dist-info"
+                }
+            ]
+        },
+        "anyio": {
+            "name": "anyio",
+            "version": "4.13.0",
+            "requirements": [
+                {
+                    "raw": "anyio==4.13.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "anyio",
+                    "specifier": "==4.13.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/anyio-4.13.0.dist-info"
+                }
+            ]
+        },
+        "httpcore": {
+            "name": "httpcore",
+            "version": "1.0.9",
+            "requirements": [
+                {
+                    "raw": "httpcore==1.0.9",
+                    "extras": [],
+                    "marker": null,
+                    "name": "httpcore",
+                    "specifier": "==1.0.9",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/httpcore-1.0.9.dist-info"
+                }
+            ]
+        },
+        "annotated-types": {
+            "name": "annotated-types",
+            "version": "0.7.0",
+            "requirements": [
+                {
+                    "raw": "annotated-types==0.7.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "annotated-types",
+                    "specifier": "==0.7.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/annotated_types-0.7.0.dist-info"
+                }
+            ]
+        },
+        "idna": {
+            "name": "idna",
+            "version": "3.11",
+            "requirements": [
+                {
+                    "raw": "idna==3.11",
+                    "extras": [],
+                    "marker": null,
+                    "name": "idna",
+                    "specifier": "==3.11",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/idna-3.11.dist-info"
+                }
+            ]
+        },
+        "pip": {
+            "name": "pip",
+            "version": "26.0.1",
+            "requirements": [
+                {
+                    "raw": "pip==26.0.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pip",
+                    "specifier": "==26.0.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pip-26.0.1.dist-info"
+                }
+            ]
+        },
+        "coverage": {
+            "name": "coverage",
+            "version": "7.13.5",
+            "requirements": [
+                {
+                    "raw": "coverage==7.13.5",
+                    "extras": [],
+                    "marker": null,
+                    "name": "coverage",
+                    "specifier": "==7.13.5",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/coverage-7.13.5.dist-info"
+                }
+            ]
+        },
+        "urllib3": {
+            "name": "urllib3",
+            "version": "2.6.3",
+            "requirements": [
+                {
+                    "raw": "urllib3==2.6.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "urllib3",
+                    "specifier": "==2.6.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/urllib3-2.6.3.dist-info"
+                }
+            ]
+        },
+        "setuptools": {
+            "name": "setuptools",
+            "version": "79.0.1",
+            "requirements": [
+                {
+                    "raw": "setuptools==79.0.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "setuptools",
+                    "specifier": "==79.0.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/setuptools-79.0.1.dist-info"
+                }
+            ]
+        },
+        "tomlkit": {
+            "name": "tomlkit",
+            "version": "0.14.0",
+            "requirements": [
+                {
+                    "raw": "tomlkit==0.14.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "tomlkit",
+                    "specifier": "==0.14.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/tomlkit-0.14.0.dist-info"
+                }
+            ]
+        },
+        "flake8": {
+            "name": "flake8",
+            "version": "7.1.1",
+            "requirements": [
+                {
+                    "raw": "flake8==7.1.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "flake8",
+                    "specifier": "==7.1.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/flake8-7.1.1.dist-info"
+                }
+            ]
+        },
+        "sniffio": {
+            "name": "sniffio",
+            "version": "1.3.1",
+            "requirements": [
+                {
+                    "raw": "sniffio==1.3.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "sniffio",
+                    "specifier": "==1.3.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/sniffio-1.3.1.dist-info"
+                }
+            ]
+        },
+        "uvicorn": {
+            "name": "uvicorn",
+            "version": "0.30.6",
+            "requirements": [
+                {
+                    "raw": "uvicorn==0.30.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "uvicorn",
+                    "specifier": "==0.30.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/uvicorn-0.30.6.dist-info"
+                }
+            ]
+        },
+        "charset-normalizer": {
+            "name": "charset-normalizer",
+            "version": "3.4.6",
+            "requirements": [
+                {
+                    "raw": "charset-normalizer==3.4.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "charset-normalizer",
+                    "specifier": "==3.4.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/charset_normalizer-3.4.6.dist-info"
+                }
+            ]
+        },
+        "pycodestyle": {
+            "name": "pycodestyle",
+            "version": "2.12.1",
+            "requirements": [
+                {
+                    "raw": "pycodestyle==2.12.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pycodestyle",
+                    "specifier": "==2.12.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pycodestyle-2.12.1.dist-info"
+                }
+            ]
+        },
+        "pyasn1": {
+            "name": "pyasn1",
+            "version": "0.6.3",
+            "requirements": [
+                {
+                    "raw": "pyasn1==0.6.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pyasn1",
+                    "specifier": "==0.6.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pyasn1-0.6.3.dist-info"
+                }
+            ]
+        },
+        "typing_extensions": {
+            "name": "typing_extensions",
+            "version": "4.15.0",
+            "requirements": [
+                {
+                    "raw": "typing_extensions==4.15.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "typing_extensions",
+                    "specifier": "==4.15.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/typing_extensions-4.15.0.dist-info"
+                }
+            ]
+        },
+        "MarkupSafe": {
+            "name": "MarkupSafe",
+            "version": "3.0.3",
+            "requirements": [
+                {
+                    "raw": "MarkupSafe==3.0.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "MarkupSafe",
+                    "specifier": "==3.0.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/markupsafe-3.0.3.dist-info"
+                }
+            ]
+        },
+        "pydantic": {
+            "name": "pydantic",
+            "version": "2.9.2",
+            "requirements": [
+                {
+                    "raw": "pydantic==2.9.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pydantic",
+                    "specifier": "==2.9.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pydantic-2.9.2.dist-info"
+                }
+            ]
+        },
+        "PyYAML": {
+            "name": "PyYAML",
+            "version": "6.0.3",
+            "requirements": [
+                {
+                    "raw": "PyYAML==6.0.3",
+                    "extras": [],
+                    "marker": null,
+                    "name": "PyYAML",
+                    "specifier": "==6.0.3",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pyyaml-6.0.3.dist-info"
+                }
+            ]
+        },
+        "typer": {
+            "name": "typer",
+            "version": "0.24.1",
+            "requirements": [
+                {
+                    "raw": "typer==0.24.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "typer",
+                    "specifier": "==0.24.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/typer-0.24.1.dist-info"
+                }
+            ]
+        },
+        "regex": {
+            "name": "regex",
+            "version": "2026.2.28",
+            "requirements": [
+                {
+                    "raw": "regex==2026.2.28",
+                    "extras": [],
+                    "marker": null,
+                    "name": "regex",
+                    "specifier": "==2026.2.28",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/regex-2026.2.28.dist-info"
+                }
+            ]
+        },
+        "uvloop": {
+            "name": "uvloop",
+            "version": "0.22.1",
+            "requirements": [
+                {
+                    "raw": "uvloop==0.22.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "uvloop",
+                    "specifier": "==0.22.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/uvloop-0.22.1.dist-info"
+                }
+            ]
+        },
+        "cffi": {
+            "name": "cffi",
+            "version": "2.0.0",
+            "requirements": [
+                {
+                    "raw": "cffi==2.0.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "cffi",
+                    "specifier": "==2.0.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/cffi-2.0.0.dist-info"
+                }
+            ]
+        },
+        "nltk": {
+            "name": "nltk",
+            "version": "3.9.4",
+            "requirements": [
+                {
+                    "raw": "nltk==3.9.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "nltk",
+                    "specifier": "==3.9.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/nltk-3.9.4.dist-info"
+                }
+            ]
+        },
+        "fastapi": {
+            "name": "fastapi",
+            "version": "0.115.0",
+            "requirements": [
+                {
+                    "raw": "fastapi==0.115.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "fastapi",
+                    "specifier": "==0.115.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/fastapi-0.115.0.dist-info"
+                }
+            ]
+        },
+        "platformdirs": {
+            "name": "platformdirs",
+            "version": "4.9.4",
+            "requirements": [
+                {
+                    "raw": "platformdirs==4.9.4",
+                    "extras": [],
+                    "marker": null,
+                    "name": "platformdirs",
+                    "specifier": "==4.9.4",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/platformdirs-4.9.4.dist-info"
+                }
+            ]
+        },
+        "stevedore": {
+            "name": "stevedore",
+            "version": "5.7.0",
+            "requirements": [
+                {
+                    "raw": "stevedore==5.7.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "stevedore",
+                    "specifier": "==5.7.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/stevedore-5.7.0.dist-info"
+                }
+            ]
+        },
+        "ruamel.yaml": {
+            "name": "ruamel.yaml",
+            "version": "0.19.1",
+            "requirements": [
+                {
+                    "raw": "ruamel.yaml==0.19.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "ruamel.yaml",
+                    "specifier": "==0.19.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ruamel_yaml-0.19.1.dist-info"
+                }
+            ]
+        },
+        "h11": {
+            "name": "h11",
+            "version": "0.16.0",
+            "requirements": [
+                {
+                    "raw": "h11==0.16.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "h11",
+                    "specifier": "==0.16.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/h11-0.16.0.dist-info"
+                }
+            ]
+        },
+        "Authlib": {
+            "name": "Authlib",
+            "version": "1.6.9",
+            "requirements": [
+                {
+                    "raw": "Authlib==1.6.9",
+                    "extras": [],
+                    "marker": null,
+                    "name": "Authlib",
+                    "specifier": "==1.6.9",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/authlib-1.6.9.dist-info"
+                }
+            ]
+        },
+        "pyflakes": {
+            "name": "pyflakes",
+            "version": "3.2.0",
+            "requirements": [
+                {
+                    "raw": "pyflakes==3.2.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "pyflakes",
+                    "specifier": "==3.2.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/pyflakes-3.2.0.dist-info"
+                }
+            ]
+        },
+        "watchfiles": {
+            "name": "watchfiles",
+            "version": "1.1.1",
+            "requirements": [
+                {
+                    "raw": "watchfiles==1.1.1",
+                    "extras": [],
+                    "marker": null,
+                    "name": "watchfiles",
+                    "specifier": "==1.1.1",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/watchfiles-1.1.1.dist-info"
+                }
+            ]
+        }
+    },
+    "affected_packages": {
+        "python-jose": {
+            "name": "python-jose",
+            "version": "3.3.0",
+            "requirements": [
+                {
+                    "raw": "python-jose==3.3.0",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-jose",
+                    "specifier": "==3.3.0",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_jose-3.3.0.dist-info"
+                }
+            ],
+            "found": null,
+            "insecure_versions": [
+                "0.1.0",
+                "0.1.1",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.2.0",
+                "0.3.0",
+                "0.4.0",
+                "0.5.0",
+                "0.5.1",
+                "0.5.2",
+                "0.5.3",
+                "0.5.4",
+                "0.5.5",
+                "0.5.6",
+                "0.6.1",
+                "0.6.2",
+                "0.7.0",
+                "1.0.0",
+                "1.1.0",
+                "1.2.0",
+                "1.3.0",
+                "1.3.1",
+                "1.3.2",
+                "1.4.0",
+                "2.0.0",
+                "2.0.1",
+                "2.0.2",
+                "3.0.0",
+                "3.0.1",
+                "3.1.0",
+                "3.2.0",
+                "3.3.0"
+            ],
+            "secure_versions": [
+                "3.5.0",
+                "3.4.0"
+            ],
+            "latest_version_without_known_vulnerabilities": "3.5.0",
+            "latest_version": "3.5.0",
+            "more_info_url": "https://getsafety.com/p/pypi/python-jose/97c/"
+        },
+        "starlette": {
+            "name": "starlette",
+            "version": "0.38.6",
+            "requirements": [
+                {
+                    "raw": "starlette==0.38.6",
+                    "extras": [],
+                    "marker": null,
+                    "name": "starlette",
+                    "specifier": "==0.38.6",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+                }
+            ],
+            "found": null,
+            "insecure_versions": [
+                "0.1.0",
+                "0.1.1",
+                "0.1.2",
+                "0.1.3",
+                "0.1.4",
+                "0.1.5",
+                "0.1.6",
+                "0.1.7",
+                "0.1.8",
+                "0.1.9",
+                "0.1.10",
+                "0.1.11",
+                "0.1.12",
+                "0.1.13",
+                "0.1.14",
+                "0.1.15",
+                "0.1.16",
+                "0.1.17",
+                "0.2.0",
+                "0.2.1",
+                "0.2.2",
+                "0.2.3",
+                "0.3.0",
+                "0.3.1",
+                "0.3.2",
+                "0.3.3",
+                "0.3.4",
+                "0.3.5",
+                "0.3.6",
+                "0.3.7",
+                "0.4.0",
+                "0.4.1",
+                "0.4.2",
+                "0.5.0",
+                "0.5.1",
+                "0.5.2",
+                "0.5.3",
+                "0.5.4",
+                "0.5.5",
+                "0.6.0",
+                "0.6.1",
+                "0.6.2",
+                "0.6.3",
+                "0.7.0",
+                "0.7.1",
+                "0.7.2",
+                "0.7.3",
+                "0.7.4",
+                "0.8.0",
+                "0.8.1",
+                "0.8.2",
+                "0.8.3",
+                "0.8.4",
+                "0.8.5",
+                "0.8.6",
+                "0.8.7",
+                "0.8.8",
+                "0.9.0",
+                "0.9.1",
+                "0.9.2",
+                "0.9.3",
+                "0.9.4",
+                "0.9.5",
+                "0.9.6",
+                "0.9.7",
+                "0.9.8",
+                "0.9.9",
+                "0.9.10",
+                "0.9.11",
+                "0.10.0",
+                "0.10.1",
+                "0.10.2",
+                "0.10.3",
+                "0.10.4",
+                "0.10.5",
+                "0.10.6",
+                "0.10.7",
+                "0.11.0",
+                "0.11.1",
+                "0.11.2",
+                "0.11.3",
+                "0.11.4",
+                "0.12.0b1",
+                "0.12.0b2",
+                "0.12.0b3",
+                "0.12.0",
+                "0.12.1",
+                "0.12.2",
+                "0.12.3",
+                "0.12.4",
+                "0.12.5",
+                "0.12.6",
+                "0.12.7",
+                "0.12.8",
+                "0.12.9",
+                "0.12.10",
+                "0.12.11",
+                "0.12.12",
+                "0.12.13",
+                "0.13.0",
+                "0.13.1",
+                "0.13.2",
+                "0.13.3",
+                "0.13.4",
+                "0.13.5",
+                "0.13.6",
+                "0.13.7",
+                "0.13.8",
+                "0.14.0",
+                "0.14.1",
+                "0.14.2",
+                "0.15.0",
+                "0.16.0",
+                "0.17.0",
+                "0.17.1",
+                "0.18.0",
+                "0.19.0",
+                "0.19.1",
+                "0.20.0",
+                "0.20.1",
+                "0.20.2",
+                "0.20.3",
+                "0.20.4",
+                "0.21.0",
+                "0.22.0",
+                "0.23.0",
+                "0.23.1",
+                "0.24.0",
+                "0.25.0",
+                "0.26.0",
+                "0.26.0.post1",
+                "0.26.1",
+                "0.27.0",
+                "0.28.0",
+                "0.29.0",
+                "0.30.0",
+                "0.31.0",
+                "0.31.1",
+                "0.32.0",
+                "0.32.0.post1",
+                "0.33.0",
+                "0.34.0",
+                "0.35.0",
+                "0.35.1",
+                "0.36.0",
+                "0.36.1",
+                "0.36.2",
+                "0.36.3",
+                "0.37.0",
+                "0.37.1",
+                "0.37.2",
+                "0.38.0",
+                "0.38.1",
+                "0.38.2",
+                "0.38.3",
+                "0.38.4",
+                "0.38.5",
+                "0.38.6",
+                "0.39.0",
+                "0.39.1",
+                "0.39.2",
+                "0.40.0",
+                "0.41.0",
+                "0.41.1",
+                "0.41.2",
+                "0.41.3",
+                "0.42.0",
+                "0.43.0",
+                "0.44.0",
+                "0.45.0",
+                "0.45.1",
+                "0.45.2",
+                "0.45.3",
+                "0.46.0",
+                "0.46.1",
+                "0.46.2",
+                "0.47.0",
+                "0.47.1",
+                "0.47.2",
+                "0.47.3",
+                "0.48.0",
+                "0.49.0"
+            ],
+            "secure_versions": [
+                "1.0.0",
+                "1.0.0rc1",
+                "0.52.1",
+                "0.52.0",
+                "0.51.0",
+                "0.50.0",
+                "0.49.3",
+                "0.49.2",
+                "0.49.1"
+            ],
+            "latest_version_without_known_vulnerabilities": "1.0.0",
+            "latest_version": "1.0.0",
+            "more_info_url": "https://getsafety.com/p/pypi/starlette/97c/"
+        },
+        "python-multipart": {
+            "name": "python-multipart",
+            "version": "0.0.12",
+            "requirements": [
+                {
+                    "raw": "python-multipart==0.0.12",
+                    "extras": [],
+                    "marker": null,
+                    "name": "python-multipart",
+                    "specifier": "==0.0.12",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_multipart-0.0.12.dist-info"
+                }
+            ],
+            "found": null,
+            "insecure_versions": [
+                "0.0.1",
+                "0.0.2",
+                "0.0.3",
+                "0.0.4",
+                "0.0.5",
+                "0.0.6",
+                "0.0.7",
+                "0.0.8",
+                "0.0.9",
+                "0.0.10",
+                "0.0.11",
+                "0.0.12",
+                "0.0.13",
+                "0.0.14",
+                "0.0.15",
+                "0.0.16",
+                "0.0.17",
+                "0.0.18",
+                "0.0.19",
+                "0.0.20",
+                "0.0.21"
+            ],
+            "secure_versions": [
+                "0.0.22"
+            ],
+            "latest_version_without_known_vulnerabilities": "0.0.22",
+            "latest_version": "0.0.22",
+            "more_info_url": "https://getsafety.com/p/pypi/python-multipart/97c/"
+        },
+        "ecdsa": {
+            "name": "ecdsa",
+            "version": "0.19.2",
+            "requirements": [
+                {
+                    "raw": "ecdsa==0.19.2",
+                    "extras": [],
+                    "marker": null,
+                    "name": "ecdsa",
+                    "specifier": "==0.19.2",
+                    "url": null,
+                    "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ecdsa-0.19.2.dist-info"
+                }
+            ],
+            "found": null,
+            "insecure_versions": [
+                "0.6",
+                "0.7",
+                "0.8",
+                "0.9",
+                "0.10",
+                "0.11",
+                "0.12",
+                "0.13",
+                "0.13.1",
+                "0.13.2",
+                "0.13.3",
+                "0.14",
+                "0.14.1",
+                "0.15",
+                "0.16.0",
+                "0.16.1",
+                "0.17.0",
+                "0.18.0b1",
+                "0.18.0b2",
+                "0.18.0",
+                "0.19.0",
+                "0.19.1",
+                "0.19.2"
+            ],
+            "secure_versions": [],
+            "latest_version_without_known_vulnerabilities": "",
+            "latest_version": "0.19.2",
+            "more_info_url": "https://getsafety.com/p/pypi/ecdsa/97c/"
+        }
+    },
+    "announcements": [],
+    "vulnerabilities": [
+        {
+            "vulnerability_id": "70716",
+            "package_name": "python-jose",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<3.4.0"
+            ],
+            "all_vulnerable_specs": [
+                "<3.4.0"
+            ],
+            "analyzed_version": "3.3.0",
+            "analyzed_requirement": {
+                "raw": "python-jose==3.3.0",
+                "extras": [],
+                "marker": null,
+                "name": "python-jose",
+                "specifier": "==3.3.0",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_jose-3.3.0.dist-info"
+            },
+            "advisory": "Affected versions of Python-jose allow attackers to cause a denial of service (resource consumption) during a decode via a crafted JSON Web Encryption (JWE) token with a high compression ratio, aka a \"JWT bomb.\" This is similar to CVE-2024-21319.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2024-33664",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/70716/97c"
+        },
+        {
+            "vulnerability_id": "70715",
+            "package_name": "python-jose",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<3.4.0"
+            ],
+            "all_vulnerable_specs": [
+                "<3.4.0"
+            ],
+            "analyzed_version": "3.3.0",
+            "analyzed_requirement": {
+                "raw": "python-jose==3.3.0",
+                "extras": [],
+                "marker": null,
+                "name": "python-jose",
+                "specifier": "==3.3.0",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_jose-3.3.0.dist-info"
+            },
+            "advisory": "Affected versions of Python-jose have a algorithm confusion vulnerability with OpenSSH ECDSA keys and other key formats. This is similar to CVE-2022-29217.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2024-33663",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/70715/97c"
+        },
+        {
+            "vulnerability_id": "78279",
+            "package_name": "starlette",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                ">=0.13.5,<0.47.2"
+            ],
+            "all_vulnerable_specs": [
+                ">=0.13.5,<0.47.2"
+            ],
+            "analyzed_version": "0.38.6",
+            "analyzed_requirement": {
+                "raw": "starlette==0.38.6",
+                "extras": [],
+                "marker": null,
+                "name": "starlette",
+                "specifier": "==0.38.6",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+            },
+            "advisory": "Affected versions of the `starlette` package are vulnerable to Denial of Service (DoS) due to improper handling of large file uploads in multi-part form parsing. The vulnerability exists in the `UploadFile` class, where the logic fails to adequately check if additional bytes will trigger a file rollover, leading to blocking of the main thread. An attacker can exploit this by uploading large files that exceed the default max spool size, causing the event thread to block and preventing the application from accepting new connections.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2025-54121",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/78279/97c"
+        },
+        {
+            "vulnerability_id": "80876",
+            "package_name": "starlette",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<0.49.1"
+            ],
+            "all_vulnerable_specs": [
+                "<0.49.1"
+            ],
+            "analyzed_version": "0.38.6",
+            "analyzed_requirement": {
+                "raw": "starlette==0.38.6",
+                "extras": [],
+                "marker": null,
+                "name": "starlette",
+                "specifier": "==0.38.6",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+            },
+            "advisory": "Affected versions of the Starlette package are vulnerable to Denial of Service (DoS) due to inefficient Range header processing behaviour in starlette.responses.FileResponse. The FileResponse._parse_range_header() routine parses multi-range requests and merges intervals using an O(n\u00b2) algorithm, so supplying many non-overlapping ranges causes quadratic CPU usage in routes that return FileResponse or are served via starlette.staticfiles.StaticFiles.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2025-62727",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/80876/97c"
+        },
+        {
+            "vulnerability_id": "73725",
+            "package_name": "starlette",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<0.40.0"
+            ],
+            "all_vulnerable_specs": [
+                "<0.40.0"
+            ],
+            "analyzed_version": "0.38.6",
+            "analyzed_requirement": {
+                "raw": "starlette==0.38.6",
+                "extras": [],
+                "marker": null,
+                "name": "starlette",
+                "specifier": "==0.38.6",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+            },
+            "advisory": "Affected versions of the Starlette framework are vulnerable to Denial of Service (DoS) attacks due to the lack of restrictions on multipart part sizes. The vulnerability resides in the MultiPartParser class, which previously did not enforce size limits on incoming data. This issue is mitigated by introducing a max_part_size constraint and raises exceptions when limits are exceeded.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2024-47874",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/73725/97c"
+        },
+        {
+            "vulnerability_id": "85155",
+            "package_name": "python-multipart",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<0.0.22"
+            ],
+            "all_vulnerable_specs": [
+                "<0.0.22"
+            ],
+            "analyzed_version": "0.0.12",
+            "analyzed_requirement": {
+                "raw": "python-multipart==0.0.12",
+                "extras": [],
+                "marker": null,
+                "name": "python-multipart",
+                "specifier": "==0.0.12",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_multipart-0.0.12.dist-info"
+            },
+            "advisory": "Affected versions of the python-multipart package are vulnerable to Path Traversal due to unsafe filesystem path construction when preserving user-supplied upload filenames. When UPLOAD_DIR is configured and UPLOAD_KEEP_FILENAME=True, the upload-to-disk code builds the destination path with os.path.join(file_dir, fname) after the upload exceeds MAX_MEMORY_FILE_SIZE, allowing absolute-path filenames (for example, those starting with /) to override the intended base directory.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2026-24486",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/85155/97c"
+        },
+        {
+            "vulnerability_id": "74427",
+            "package_name": "python-multipart",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                "<0.0.18"
+            ],
+            "all_vulnerable_specs": [
+                "<0.0.18"
+            ],
+            "analyzed_version": "0.0.12",
+            "analyzed_requirement": {
+                "raw": "python-multipart==0.0.12",
+                "extras": [],
+                "marker": null,
+                "name": "python-multipart",
+                "specifier": "==0.0.12",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_multipart-0.0.12.dist-info"
+            },
+            "advisory": "Affected versions of python-multipart are vulnerable to Allocation of Resources Without Limits or Throttling (CWE-770). An attacker can send specially crafted multipart/form-data requests containing excessive CR (\\r) or LF (\\n) characters before the first boundary or after the last boundary. This can lead to uncontrolled CPU usage and high memory consumption, causing the processing thread or event loop in ASGI applications to stall, resulting in a denial of service (DoS). The vulnerability exists in the MultipartParser's handling of line breaks around boundaries, where it processes each CRLF byte individually and logs warnings for each occurrence. To exploit this, an attacker simply needs to send large amounts of malformed multipart data with numerous CRLF characters. Upgrading to version 0.0.19 resolves this issue by preventing excessive resource allocation and logging when CRLF bytes are present.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2024-53981",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/74427/97c"
+        },
+        {
+            "vulnerability_id": "64459",
+            "package_name": "ecdsa",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                ">=0"
+            ],
+            "all_vulnerable_specs": [
+                ">=0"
+            ],
+            "analyzed_version": "0.19.2",
+            "analyzed_requirement": {
+                "raw": "ecdsa==0.19.2",
+                "extras": [],
+                "marker": null,
+                "name": "ecdsa",
+                "specifier": "==0.19.2",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ecdsa-0.19.2.dist-info"
+            },
+            "advisory": "The python-ecdsa library, which implements ECDSA cryptography in Python, is vulnerable to the Minerva attack (CVE-2024-23342). This vulnerability arises because scalar multiplication is not performed in constant time, affecting ECDSA signatures, key generation, and ECDH operations. ECDSA signature verification remains unaffected. The project maintainers have stated that there is no plan to release a fix for this vulnerability, citing their security policy:\r\n\"As stated in the security policy, side-channel vulnerabilities are outside the scope of the project. This is not due to a lack of interest in side-channel secure implementations but rather because the main goal of the project is to be pure Python. Implementing side-channel-free code in pure Python is impossible. Therefore, we do not plan to release a fix for this vulnerability.\"\r\nNOTE: The specs we include in this advisory differ from the publicly available on other sources. That's because research by Safety CLI Cybersecurity Team confirms that there is no plan to address this vulnerability.",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": "CVE-2024-23342",
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/64459/97c"
+        },
+        {
+            "vulnerability_id": "64396",
+            "package_name": "ecdsa",
+            "ignored": {},
+            "ignored_reason": null,
+            "ignored_expires": null,
+            "vulnerable_spec": [
+                ">=0"
+            ],
+            "all_vulnerable_specs": [
+                ">=0"
+            ],
+            "analyzed_version": "0.19.2",
+            "analyzed_requirement": {
+                "raw": "ecdsa==0.19.2",
+                "extras": [],
+                "marker": null,
+                "name": "ecdsa",
+                "specifier": "==0.19.2",
+                "url": null,
+                "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ecdsa-0.19.2.dist-info"
+            },
+            "advisory": "Ecdsa does not protects against side-channel attacks. This is because Python does not provide side-channel secure primitives (with the exception of hmac.compare_digest()), making side-channel secure programming impossible. For a sophisticated attacker observing just one operation with a private key will be sufficient to completely reconstruct the private key.\r\nhttps://pypi.org/project/ecdsa/#Security",
+            "is_transitive": false,
+            "published_date": null,
+            "fixed_versions": [],
+            "closest_versions_without_known_vulnerabilities": [],
+            "resources": [],
+            "CVE": null,
+            "severity": null,
+            "affected_versions": [],
+            "more_info_url": "https://getsafety.com/v/64396/97c"
+        }
+    ],
+    "ignored_vulnerabilities": [],
+    "remediations": {
+        "python-jose": {
+            "requirements": {
+                "==3.3.0": {
+                    "vulnerabilities_found": 2,
+                    "version": "3.3.0",
+                    "requirement": {
+                        "raw": "python-jose==3.3.0",
+                        "extras": [],
+                        "marker": null,
+                        "name": "python-jose",
+                        "specifier": "==3.3.0",
+                        "url": null,
+                        "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_jose-3.3.0.dist-info"
+                    },
+                    "more_info_url": "https://getsafety.com/p/pypi/python-jose/97c/"
+                }
+            },
+            "current_version": null,
+            "vulnerabilities_found": null,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": null
+        },
+        "starlette": {
+            "requirements": {
+                "==0.38.6": {
+                    "vulnerabilities_found": 3,
+                    "version": "0.38.6",
+                    "requirement": {
+                        "raw": "starlette==0.38.6",
+                        "extras": [],
+                        "marker": null,
+                        "name": "starlette",
+                        "specifier": "==0.38.6",
+                        "url": null,
+                        "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/starlette-0.38.6.dist-info"
+                    },
+                    "more_info_url": "https://getsafety.com/p/pypi/starlette/97c/"
+                }
+            },
+            "current_version": null,
+            "vulnerabilities_found": null,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": null
+        },
+        "python-multipart": {
+            "requirements": {
+                "==0.0.12": {
+                    "vulnerabilities_found": 2,
+                    "version": "0.0.12",
+                    "requirement": {
+                        "raw": "python-multipart==0.0.12",
+                        "extras": [],
+                        "marker": null,
+                        "name": "python-multipart",
+                        "specifier": "==0.0.12",
+                        "url": null,
+                        "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/python_multipart-0.0.12.dist-info"
+                    },
+                    "more_info_url": "https://getsafety.com/p/pypi/python-multipart/97c/"
+                }
+            },
+            "current_version": null,
+            "vulnerabilities_found": null,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": null
+        },
+        "ecdsa": {
+            "requirements": {
+                "==0.19.2": {
+                    "vulnerabilities_found": 2,
+                    "version": "0.19.2",
+                    "requirement": {
+                        "raw": "ecdsa==0.19.2",
+                        "extras": [],
+                        "marker": null,
+                        "name": "ecdsa",
+                        "specifier": "==0.19.2",
+                        "url": null,
+                        "found": "/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/ecdsa-0.19.2.dist-info"
+                    },
+                    "more_info_url": "https://getsafety.com/p/pypi/ecdsa/97c/"
+                }
+            },
+            "current_version": null,
+            "vulnerabilities_found": null,
+            "recommended_version": null,
+            "other_recommended_versions": [],
+            "more_info_url": null
+        }
+    },
+    "remediations_results": {
+        "vulnerabilities_fixed": [],
+        "remediations_applied": {},
+        "remediations_skipped": {}
+    }
+}
+
+
++===========================================================================================================================================================================================+
+
+
+DEPRECATED: this command (`check`) has been DEPRECATED, and will be unsupported beyond 01 June 2024.
+
+
+We highly encourage switching to the new `scan` command which is easier to use, more powerful, and can be set up to mimic the deprecated command if required.
+
+
++===========================================================================================================================================================================================+
+
+

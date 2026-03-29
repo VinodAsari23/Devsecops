@@ -1,0 +1,497 @@
+% !TEX program = pdflatex
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{balance}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\tiny,
+    tabsize=2
+}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Construction Progress Tracker: A Cloud-Native DevSecOps Approach to Real-Time Construction Project Management}
+
+\author{
+\IEEEauthorblockN{Mahesh Purre}
+\IEEEauthorblockA{
+Student No: x24101346 \\
+\textit{MSc in Cloud Computing} \\
+\textit{Module: H9CDOS Cloud DevOpsSec} \\
+National College of Ireland, Dublin \\
+x24101346@student.ncirl.ie
+}
+}
+
+\maketitle
+
+\begin{abstract}
+The construction industry continues to face significant challenges in tracking project progress, managing task assignments, and maintaining real-time visibility across distributed teams. This paper presents the Construction Progress Tracker, a full-stack cloud-native web application built using Python FastAPI, React 19, and PostgreSQL 15, deployed on Amazon Web Services (AWS) EC2 infrastructure. The system implements role-based access control (RBAC) with JSON Web Token (JWT) authentication, automated progress calculation derived from task-level averages, and a comprehensive CI/CD pipeline employing GitHub Actions across four discrete jobs encompassing build, test, static analysis, security scanning, and automated deployment. Six AWS services---EC2, Security Groups, SSM Parameter Store, IAM, Key Pairs, and CloudWatch Logs---are leveraged to provide a secure, observable, and cost-efficient hosting environment. Security analysis using Bandit, Trivy, and OWASP ZAP identified one low-severity static finding and four Common Vulnerabilities and Exposures (CVEs) in third-party dependencies. This paper details the system architecture, database design, security posture, CI/CD pipeline implementation, and deployment strategy, contributing a reference architecture for small-to-medium construction firms seeking affordable cloud-based project management solutions.
+\end{abstract}
+
+\begin{IEEEkeywords}
+DevSecOps, cloud computing, construction management, FastAPI, CI/CD, AWS, role-based access control, security scanning
+\end{IEEEkeywords}
+
+%----------------------------------------------------------------------
+\section{Introduction}
+\label{sec:introduction}
+
+The global construction industry, valued at over \$13 trillion annually, remains one of the least digitised sectors, with productivity growth lagging behind manufacturing and other industries by a factor of nearly two \cite{mckinsey2017}. Project delays, budget overruns, and communication breakdowns between site workers and project managers continue to plague construction firms of all sizes \cite{aziz2013}. Traditional approaches---paper-based logs, spreadsheets, and fragmented email chains---provide neither the real-time visibility nor the auditability required to manage modern construction projects effectively \cite{bilal2016}.
+
+Cloud computing has emerged as a transformative force, offering scalable, pay-as-you-go infrastructure that enables even small firms to deploy enterprise-grade applications \cite{mell2011nist}. Concurrently, the DevSecOps paradigm has shifted security from a post-deployment afterthought to an integral component of the software delivery pipeline, embedding automated vulnerability scanning, static analysis, and compliance checks into every build \cite{myrbakken2017devsecops}.
+
+This paper presents the Construction Progress Tracker, a cloud-native web application that addresses the need for an affordable, secure, and user-friendly tool for tracking construction projects and tasks. The system is deployed at \url{http://3.238.107.20} and provides role-based functionality for two user categories: Workers and Managers. A demonstration account with Manager privileges is available using the credentials \texttt{examiner} / \texttt{ConstructTrack2024}. A video demonstration of the application is accessible at \url{https://youtu.be/INSERT\_VIDEO\_URL\_HERE}, and the source code repository is hosted at \url{https://github.com/purremahesh290-sudo/devops}.
+
+The remainder of this paper is organised as follows. Section~\ref{sec:related_work} reviews related work in construction management systems and DevSecOps practices. Section~\ref{sec:architecture} describes the system architecture and technology stack. Section~\ref{sec:database} details the database design. Section~\ref{sec:implementation} presents the implementation of key features. Section~\ref{sec:cicd} discusses the CI/CD pipeline. Section~\ref{sec:security} analyses the security posture. Section~\ref{sec:aws} documents the AWS deployment. Section~\ref{sec:evaluation} evaluates the system. Section~\ref{sec:conclusion} concludes the paper and identifies future work.
+
+%----------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Construction Project Management Software}
+
+Digital tools for construction management have evolved from desktop-based scheduling applications to cloud-hosted platforms offering real-time collaboration. Procore, PlanGrid, and Autodesk Construction Cloud represent commercial solutions that provide comprehensive project tracking, document management, and field reporting capabilities \cite{sacks2018bim}. However, these platforms carry substantial licensing costs that place them beyond the reach of smaller contractors \cite{omar2018challenges}.
+
+Harty \cite{harty2005innovation} demonstrated that construction firms frequently resist adopting new technologies due to perceived complexity and the high cost of proprietary software. Open-source and custom-built alternatives have therefore gained traction, particularly when coupled with cloud deployment models that eliminate the need for on-premises infrastructure \cite{jha2017cloud}.
+
+\subsection{Cloud-Native Application Development}
+
+The twelve-factor application methodology, articulated by Wiggins \cite{wiggins2017twelve}, provides a set of principles for building cloud-native applications that are portable, scalable, and maintainable. FastAPI, a modern Python web framework, has gained rapid adoption owing to its high performance, automatic OpenAPI documentation generation, and native support for asynchronous request handling \cite{ramirez2024fastapi}. When combined with SQLAlchemy as an Object-Relational Mapping (ORM) layer, FastAPI enables rapid development of RESTful APIs with robust database abstraction \cite{bayer2012sqlalchemy}.
+
+React, maintained by Meta, remains the dominant front-end library for building single-page applications (SPAs), offering a component-based architecture and virtual DOM for efficient rendering \cite{gackenheimer2015react}. The combination of a Python-based API backend with a React frontend has become a widely adopted pattern in full-stack web development \cite{banks2014fullstack}.
+
+\subsection{DevSecOps in Cloud Environments}
+
+The DevSecOps movement integrates security practices into every phase of the software development lifecycle (SDLC), from code authoring through to production deployment \cite{myrbakken2017devsecops}. Automated security scanning tools such as Bandit for Python static analysis \cite{openstack2024bandit}, Trivy for container and dependency vulnerability detection \cite{aqua2024trivy}, and OWASP ZAP for dynamic application security testing (DAST) \cite{owasp2024zap} enable continuous security assurance without impeding delivery velocity.
+
+GitHub Actions, a CI/CD platform integrated directly into the GitHub repository hosting service, facilitates the definition of multi-job workflows that execute build, test, analysis, and deployment stages in an automated and reproducible manner \cite{github2024actions}. Prior work by Shahin et al. \cite{shahin2017continuous} established that continuous integration and continuous deployment pipelines significantly reduce defect rates and accelerate time-to-market.
+
+%----------------------------------------------------------------------
+\section{System Architecture}
+\label{sec:architecture}
+
+\subsection{Overview}
+
+The Construction Progress Tracker follows a three-tier architecture comprising a React 19 single-page application (presentation tier), a FastAPI 0.115.0 REST API (logic tier), and a PostgreSQL 15 relational database (data tier). All three tiers are deployed on a single AWS EC2 \texttt{t3.micro} instance to minimise operational costs while maintaining a cohesive deployment model.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{High-level system architecture of the Construction Progress Tracker.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Technology Stack}
+
+Table~\ref{tab:techstack} summarises the principal technologies employed across the application stack.
+
+\begin{table}[h]
+\centering
+\caption{Technology Stack Summary}
+\label{tab:techstack}
+\begin{tabular}{@{}p{2.2cm}p{5.5cm}@{}}
+\toprule
+\textbf{Component} & \textbf{Technology} \\
+\midrule
+Backend Framework & Python 3.11, FastAPI 0.115.0 \\
+ORM & SQLAlchemy 2.0.35 \\
+Database & PostgreSQL 15 \\
+Frontend & React 19 (SPA) \\
+Authentication & JWT (python-jose, HMAC-SHA256) \\
+Password Hashing & BCrypt \\
+Reverse Proxy & Nginx \\
+Process Manager & systemd \\
+Cloud Provider & AWS (EC2 t3.micro) \\
+CI/CD & GitHub Actions (4 jobs) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Request Flow}
+
+Client HTTP requests arrive at the Nginx reverse proxy, which serves the static React build files for front-end routes and proxies API requests (prefixed with \texttt{/api}) to the Uvicorn ASGI server running the FastAPI application on a local port. The FastAPI application authenticates requests using JWT bearer tokens, enforces role-based access control, and interacts with PostgreSQL through SQLAlchemy ORM sessions. Responses traverse the same path in reverse, with Nginx handling TLS termination and static asset caching.
+
+%----------------------------------------------------------------------
+\section{Database Design}
+\label{sec:database}
+
+The relational schema comprises three normalised tables: \texttt{users}, \texttt{projects}, and \texttt{tasks}. Figure~\ref{fig:erd} illustrates the entity-relationship diagram.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{Entity-relationship diagram of the Construction Progress Tracker database.}
+\label{fig:erd}
+\end{figure}
+
+\subsection{Users Table}
+
+The \texttt{users} table stores authentication credentials and role assignments. Each user is assigned a role of either \texttt{WORKER} or \texttt{MANAGER}, which governs access to CRUD operations on projects and tasks. Passwords are stored as BCrypt hashes, never in plaintext. The schema includes: \texttt{id} (primary key), \texttt{username}, \texttt{email}, \texttt{password\_hash}, \texttt{role} (enumerated as WORKER or MANAGER), and \texttt{created\_at} (timestamp).
+
+\subsection{Projects Table}
+
+The \texttt{projects} table captures project metadata including name, description, geographical location, scheduling dates, budget, and status. The \texttt{status} field is an enumeration with five possible values: \texttt{PLANNING}, \texttt{IN\_PROGRESS}, \texttt{ON\_HOLD}, \texttt{COMPLETED}, and \texttt{CANCELLED}. The \texttt{overall\_progress} field is a computed value derived from the average progress of associated tasks. A foreign key \texttt{owner\_id} references the \texttt{users} table, establishing project ownership.
+
+\subsection{Tasks Table}
+
+The \texttt{tasks} table represents individual work items within a project. Each task records a title, description, assignee, status (\texttt{PENDING}, \texttt{IN\_PROGRESS}, \texttt{COMPLETED}, or \texttt{BLOCKED}), a numeric progress value ranging from 0 to 100, a due date, and free-text notes. The foreign key \texttt{project\_id} references the \texttt{projects} table, enabling cascade deletion when a project is removed.
+
+%----------------------------------------------------------------------
+\section{Implementation}
+\label{sec:implementation}
+
+\subsection{Authentication and Authorisation}
+
+The system implements stateless authentication using JSON Web Tokens (JWT) signed with HMAC-SHA256 via the \texttt{python-jose} library \cite{ietf2015jwt}. Upon successful login, the server issues a JWT containing the user's identity and role claims. Subsequent requests include this token in the \texttt{Authorization} header as a Bearer token. The FastAPI dependency injection system provides a reusable \texttt{get\_current\_user} dependency that validates the token, extracts claims, and retrieves the corresponding user record from the database.
+
+Role-based access control (RBAC) restricts endpoint access based on the authenticated user's role. Managers possess full CRUD capabilities across all projects and tasks, whereas Workers are limited to viewing projects and updating task progress for tasks assigned to them.
+
+\subsection{CRUD Operations}
+
+The application exposes RESTful endpoints for three resource types:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Users}: Registration (signup) endpoint that validates input, hashes passwords with BCrypt, and creates user records.
+    \item \textbf{Projects}: Full CRUD (Create, Read, Update, Delete) with ownership enforcement and cascade deletion of associated tasks.
+    \item \textbf{Tasks}: Full CRUD with project association, progress tracking, and status management.
+\end{itemize}
+
+\subsection{Non-CRUD Business Logic}
+
+Several non-trivial business logic features augment the basic CRUD operations:
+
+\begin{enumerate}[noitemsep]
+    \item \textbf{Automatic Progress Calculation}: Project-level progress is computed as the arithmetic mean of the progress values of all tasks belonging to that project. This calculation is triggered automatically whenever a task's progress is updated.
+    \item \textbf{Date Validation}: The system enforces that a project's start date must precede its expected end date, rejecting requests that violate this constraint.
+    \item \textbf{Input Validation}: Pydantic models enforce strict type checking, field constraints, and data validation on all incoming request payloads \cite{pydantic2024docs}.
+    \item \textbf{IDOR Prevention}: Insecure Direct Object Reference (IDOR) attacks are mitigated by verifying that the authenticated user has appropriate ownership or role-based permission before granting access to any resource.
+    \item \textbf{Cascade Delete}: Deleting a project automatically removes all associated tasks, maintaining referential integrity.
+    \item \textbf{Demo Data Seeding}: The application seeds the database with three demonstration projects and seven tasks to facilitate examiner evaluation.
+    \item \textbf{Health Check Endpoint}: A dedicated \texttt{/health} endpoint enables monitoring systems and the CI/CD pipeline to verify application availability.
+    \item \textbf{Protected Routes}: All data-bearing endpoints require valid JWT authentication, with the sole exceptions being the login, registration, and health check endpoints.
+\end{enumerate}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{Construction Progress Tracker dashboard interface.}
+\label{fig:dashboard}
+\end{figure}
+
+%----------------------------------------------------------------------
+\section{CI/CD Pipeline}
+\label{sec:cicd}
+
+The CI/CD pipeline is implemented using GitHub Actions and comprises four sequential jobs, each executing a distinct phase of the software delivery lifecycle. Figure~\ref{fig:pipeline} depicts the pipeline architecture.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{GitHub Actions CI/CD pipeline with four jobs.}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Job 1: Build and Test}
+
+The first job establishes a Python 3.11 environment, installs project dependencies, and executes the test suite comprising 20 pytest unit and integration tests. These tests cover authentication flows, CRUD operations, input validation, role-based access enforcement, and edge cases such as duplicate registration attempts and invalid token handling. A passing test suite is a prerequisite for subsequent pipeline stages.
+
+\subsection{Job 2: Static Analysis}
+
+The second job executes three static analysis tools in parallel:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Bandit} \cite{openstack2024bandit}: A Python-specific security linter that identifies common security anti-patterns. The analysis reports one LOW-severity finding (B110: \texttt{try-except-pass} pattern), which represents an acceptable risk in the context of non-critical exception handling.
+    \item \textbf{Pylint}: A comprehensive Python code quality analyser. The current codebase achieves a score of approximately 6.0/10, with the majority of deductions arising from import ordering and naming convention preferences rather than functional defects.
+    \item \textbf{Flake8}: A PEP 8 style guide enforcer that reports approximately 18 style violations, primarily relating to line length and whitespace conventions.
+\end{itemize}
+
+\subsection{Job 3: Security Scan}
+
+The third job performs security vulnerability scanning using two complementary tools:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Trivy} \cite{aqua2024trivy}: Scans Python dependencies for known CVEs. Four vulnerabilities were identified, detailed in Section~\ref{sec:security}.
+    \item \textbf{OWASP ZAP} \cite{owasp2024zap}: Performs dynamic application security testing (DAST) by crawling the deployed application and testing for common web vulnerabilities such as cross-site scripting (XSS), SQL injection, and insecure headers.
+\end{itemize}
+
+\subsection{Job 4: Deploy to AWS}
+
+The fourth and final job automates deployment to the production EC2 instance via SSH. The deployment process updates the application code from the Git repository, installs any new dependencies, runs database migrations, rebuilds the React frontend, and restarts the systemd-managed application service. This approach ensures zero-downtime deployments through the use of systemd's restart capabilities.
+
+%----------------------------------------------------------------------
+\section{Security Analysis}
+\label{sec:security}
+
+A defence-in-depth approach governs the security posture of the Construction Progress Tracker. This section details the findings from automated security scanning tools and the mitigations applied.
+
+\subsection{Static Analysis: Bandit}
+
+Bandit identified one finding of LOW severity:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{B110 (try\_except\_pass)}: A bare \texttt{except: pass} clause was detected. This pattern, while generally discouraged as it may silently suppress exceptions, is employed in a non-critical code path where failure is an acceptable outcome. The risk is assessed as LOW and does not warrant remediation at this time.
+\end{itemize}
+
+\subsection{Dependency Vulnerability Scan: Trivy}
+
+Trivy identified four CVEs in third-party Python dependencies, summarised in Table~\ref{tab:cves}.
+
+\begin{table}[h]
+\centering
+\caption{Trivy CVE Findings in Third-Party Dependencies}
+\label{tab:cves}
+\begin{tabular}{@{}p{1.3cm}p{2.8cm}p{1.2cm}p{2.2cm}@{}}
+\toprule
+\textbf{Severity} & \textbf{CVE ID} & \textbf{Package} & \textbf{Description} \\
+\midrule
+CRITICAL & CVE-2024-33663 & python-jose & JWT verification bypass \\
+HIGH & CVE-2024-53981 & python-multipart & ReDoS vulnerability \\
+HIGH & CVE-2026-24486 & python-multipart & Multipart parsing flaw \\
+MEDIUM & CVE-2024-33664 & python-jose & Key confusion attack \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The CRITICAL CVE-2024-33663 in \texttt{python-jose} relates to potential JWT verification bypass when using specific algorithm configurations. In this application, the risk is partially mitigated by the exclusive use of HMAC-SHA256, which limits the attack surface to symmetric key scenarios. A recommended remediation path involves migrating to the actively maintained \texttt{PyJWT} library as a drop-in replacement \cite{jose2024advisory}.
+
+The two HIGH-severity findings in \texttt{python-multipart} relate to Regular Expression Denial of Service (ReDoS) and multipart parsing vulnerabilities. These are mitigated at the infrastructure level by Nginx request size limits and rate limiting. The MEDIUM-severity CVE-2024-33664 involves a key confusion attack vector that is not exploitable under the current HMAC-SHA256 configuration.
+
+\subsection{Dynamic Application Security Testing: OWASP ZAP}
+
+OWASP ZAP was configured to perform a baseline scan against the deployed application. The scan validated the absence of critical web application vulnerabilities including SQL injection, cross-site scripting, and cross-site request forgery. Informational findings related to missing security headers (e.g., \texttt{Content-Security-Policy}) were noted and are scheduled for remediation in future iterations.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{Security scanning results from Trivy and OWASP ZAP.}
+\label{fig:security}
+\end{figure}
+
+%----------------------------------------------------------------------
+\section{AWS Deployment}
+\label{sec:aws}
+
+The application leverages six AWS services to provide a secure, observable, and cost-efficient deployment, summarised in Table~\ref{tab:aws}.
+
+\begin{table}[h]
+\centering
+\caption{AWS Services Utilised}
+\label{tab:aws}
+\begin{tabular}{@{}p{2.4cm}p{5.3cm}@{}}
+\toprule
+\textbf{Service} & \textbf{Purpose} \\
+\midrule
+EC2 (t3.micro) & Application hosting (backend, frontend, database) \\
+Security Groups & Inbound/outbound traffic filtering (ports 22, 80, 443) \\
+SSM Parameter Store & Secure storage of database credentials and JWT secrets \\
+IAM & Least-privilege access policies for EC2 instance role \\
+Key Pairs & SSH key-based authentication for deployment access \\
+CloudWatch Logs & Centralised application and system log aggregation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Compute: EC2}
+
+A single \texttt{t3.micro} instance running Amazon Linux 2023 hosts all application components. The instance is configured with systemd service units for both the FastAPI backend (via Uvicorn) and PostgreSQL 15. Nginx serves as a reverse proxy, routing requests to the appropriate backend service and serving the static React build.
+
+\subsection{Network Security: Security Groups}
+
+The EC2 Security Group is configured with a minimal set of inbound rules: SSH (port 22) restricted to known IP ranges for administrative access, HTTP (port 80) open to all for application access, and HTTPS (port 443) reserved for future TLS implementation. All outbound traffic is permitted to allow dependency installation and external API communication.
+
+\subsection{Secrets Management: SSM Parameter Store}
+
+Sensitive configuration values---including the PostgreSQL connection string, JWT signing secret, and API keys---are stored as SecureString parameters in AWS Systems Manager (SSM) Parameter Store. The application retrieves these values at startup via the AWS SDK, ensuring that secrets are never committed to the source code repository \cite{aws2024ssm}.
+
+\subsection{Identity and Access Management: IAM}
+
+An IAM instance profile is attached to the EC2 instance, granting it least-privilege access to retrieve SSM parameters and publish CloudWatch Logs. This approach eliminates the need for long-lived access keys on the instance.
+
+\subsection{Secure Access: Key Pairs}
+
+SSH access to the EC2 instance is restricted to key-pair-based authentication, with password-based SSH login disabled. The private key is stored as an encrypted GitHub Actions secret to enable automated deployment.
+
+\subsection{Observability: CloudWatch Logs}
+
+Application logs generated by the FastAPI backend and Nginx access/error logs are streamed to CloudWatch Logs via the CloudWatch agent. This enables centralised log analysis, anomaly detection, and alerting without requiring SSH access to the instance for routine diagnostics.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{AWS deployment architecture diagram.}
+\label{fig:aws_deployment}
+\end{figure}
+
+%----------------------------------------------------------------------
+\section{Evaluation}
+\label{sec:evaluation}
+
+\subsection{Functional Testing}
+
+The test suite comprises 20 pytest test cases covering the following categories:
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Authentication}: Token generation, token validation, login with valid and invalid credentials, registration with duplicate usernames.
+    \item \textbf{Project CRUD}: Creation, retrieval (single and list), update, and deletion of projects, including ownership verification and cascade delete behaviour.
+    \item \textbf{Task CRUD}: Creation, retrieval, update, and deletion of tasks, including progress validation (0--100 range) and status transitions.
+    \item \textbf{Authorisation}: Role-based endpoint access for both WORKER and MANAGER roles, including IDOR prevention tests.
+    \item \textbf{Business Logic}: Automatic progress calculation, date validation (start before end), and input validation via Pydantic models.
+\end{itemize}
+
+All 20 tests pass consistently in both local and CI/CD environments, providing confidence in the correctness of the implemented functionality.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{images/security-report-full.png}
+\caption{Pytest test suite execution results.}
+\label{fig:pytest}
+\end{figure}
+
+\subsection{Performance Considerations}
+
+The \texttt{t3.micro} instance provides 2 vCPUs and 1~GiB of RAM, which is sufficient for the demonstration workload. FastAPI's asynchronous architecture, combined with Uvicorn's event loop, enables efficient handling of concurrent requests. PostgreSQL's connection pooling through SQLAlchemy ensures database connections are reused rather than created per request. Nginx provides static file caching and connection buffering, reducing the load on the application server.
+
+\subsection{Limitations}
+
+Several limitations are acknowledged. First, the single-instance deployment model introduces a single point of failure; horizontal scaling with an Application Load Balancer would address this in a production environment. Second, the use of HTTP rather than HTTPS means that data in transit is not encrypted, which is unsuitable for production deployments handling sensitive data. Third, the identified Trivy CVEs, particularly the CRITICAL CVE-2024-33663, require migration to a patched library for production readiness.
+
+%----------------------------------------------------------------------
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+This paper presented the Construction Progress Tracker, a cloud-native web application that demonstrates the application of DevSecOps principles to construction project management. The system provides role-based access control, automated progress tracking, and comprehensive security scanning within a fully automated CI/CD pipeline. Deployment on AWS EC2 with six supporting services establishes a cost-effective yet secure hosting environment suitable for demonstration and small-scale production use.
+
+The key contributions of this work are threefold: (1) a reference architecture for deploying a Python/React full-stack application on AWS with integrated security scanning; (2) a practical demonstration of GitHub Actions CI/CD with four distinct jobs covering testing, static analysis, security scanning, and automated deployment; and (3) an analysis of the security posture of a modern Python web application using Bandit, Trivy, and OWASP ZAP.
+
+Future work should address the following areas:
+
+\begin{itemize}[noitemsep]
+    \item Migration from \texttt{python-jose} to \texttt{PyJWT} to remediate CVE-2024-33663.
+    \item Implementation of HTTPS via AWS Certificate Manager or Let's Encrypt.
+    \item Horizontal scaling using AWS Elastic Load Balancing and Auto Scaling Groups.
+    \item Integration of real-time notifications via WebSockets for task status updates.
+    \item Addition of file upload capabilities for site photographs and progress documentation.
+    \item Migration of PostgreSQL to Amazon RDS for managed database operations and automated backups.
+\end{itemize}
+
+\section*{Submission Details}
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Student}: Mahesh Purre (x24101346)
+    \item \textbf{Programme}: MSc in Cloud Computing
+    \item \textbf{Module}: H9CDOS Cloud DevOpsSec
+    \item \textbf{Submission Date}: Wednesday 1st April 2026 at 16:00
+    \item \textbf{Application URL}: \url{http://3.238.107.20}
+    \item \textbf{Demo Credentials}: \texttt{examiner} / \texttt{ConstructTrack2024} (MANAGER role)
+    \item \textbf{Video Demo}: \url{https://youtu.be/INSERT\_VIDEO\_URL\_HERE}
+    \item \textbf{Repository}: \url{https://github.com/purremahesh290-sudo/devops}
+\end{itemize}
+
+%----------------------------------------------------------------------
+\bibliographystyle{IEEEtran}
+\begin{thebibliography}{20}
+
+\bibitem{mckinsey2017}
+R.~Agarwal, S.~Chandrasekaran, and M.~Sridhar, ``Imagining construction's digital future,'' \textit{McKinsey \& Company}, 2017. [Online]. Available: \url{https://www.mckinsey.com/industries/capital-projects-and-infrastructure}
+
+\bibitem{aziz2013}
+R.~F. Aziz, ``Ranking of delay factors in construction projects after Egyptian revolution,'' \textit{Alexandria Engineering Journal}, vol.~52, no.~3, pp.~387--406, 2013.
+
+\bibitem{bilal2016}
+M.~Bilal, L.~O. Oyedele, J.~Qadir, K.~Munir, S.~J. Ajayi, O.~O. Akinade, H.~A. Owolabi, H.~A. Alaka, and M.~Pasha, ``Big data in the construction industry: A review of present status, opportunities, and future trends,'' \textit{Advanced Engineering Informatics}, vol.~30, no.~3, pp.~500--521, 2016.
+
+\bibitem{mell2011nist}
+P.~Mell and T.~Grance, ``The NIST definition of cloud computing,'' \textit{NIST Special Publication 800-145}, National Institute of Standards and Technology, 2011.
+
+\bibitem{myrbakken2017devsecops}
+H.~Myrbakken and R.~Colomo-Palacios, ``DevSecOps: A multivocal literature review,'' in \textit{Proc. Int. Conf. Software Process Improvement and Capability Determination (SPICE)}, Palanga, Lithuania, 2017, pp.~17--29.
+
+\bibitem{sacks2018bim}
+R.~Sacks, C.~Eastman, G.~Lee, and P.~Teicholz, \textit{BIM Handbook: A Guide to Building Information Modeling for Owners, Designers, Engineers, Contractors, and Facility Managers}, 3rd~ed. Hoboken, NJ, USA: Wiley, 2018.
+
+\bibitem{omar2018challenges}
+T.~Omar and M.~L. Nehdi, ``Data acquisition technologies for construction progress tracking,'' \textit{Automation in Construction}, vol.~89, pp.~222--238, 2018.
+
+\bibitem{harty2005innovation}
+C.~Harty, ``Innovation in construction: A sociology of technology approach,'' \textit{Building Research \& Information}, vol.~33, no.~6, pp.~512--522, 2005.
+
+\bibitem{wiggins2017twelve}
+A.~Wiggins, ``The twelve-factor app,'' 2017. [Online]. Available: \url{https://12factor.net/}
+
+\bibitem{ramirez2024fastapi}
+S.~Ram\'{i}rez, ``FastAPI documentation,'' 2024. [Online]. Available: \url{https://fastapi.tiangolo.com/}
+
+\bibitem{bayer2012sqlalchemy}
+M.~Bayer, ``SQLAlchemy---the database toolkit for Python,'' 2024. [Online]. Available: \url{https://www.sqlalchemy.org/}
+
+\bibitem{gackenheimer2015react}
+C.~Gackenheimer, \textit{Introduction to React}. Berkeley, CA, USA: Apress, 2015.
+
+\bibitem{banks2014fullstack}
+A.~Banks and E.~Porcello, \textit{Learning React: Modern Patterns for Developing React Apps}, 2nd~ed. Sebastopol, CA, USA: O'Reilly Media, 2020.
+
+\bibitem{openstack2024bandit}
+OpenStack Security, ``Bandit: A tool designed to find common security issues in Python code,'' 2024. [Online]. Available: \url{https://bandit.readthedocs.io/}
+
+\bibitem{aqua2024trivy}
+Aqua Security, ``Trivy: A comprehensive and versatile security scanner,'' 2024. [Online]. Available: \url{https://trivy.dev/}
+
+\bibitem{owasp2024zap}
+OWASP Foundation, ``OWASP ZAP---the world's most widely used web app scanner,'' 2024. [Online]. Available: \url{https://www.zaproxy.org/}
+
+\bibitem{github2024actions}
+GitHub, ``GitHub Actions documentation,'' 2024. [Online]. Available: \url{https://docs.github.com/en/actions}
+
+\bibitem{shahin2017continuous}
+M.~Shahin, M.~A. Babar, and L.~Zhu, ``Continuous integration, delivery and deployment: A systematic review on approaches, tools, challenges and practices,'' \textit{IEEE Access}, vol.~5, pp.~3909--3943, 2017.
+
+\bibitem{ietf2015jwt}
+M.~Jones, J.~Bradley, and N.~Sakimura, ``JSON Web Token (JWT),'' \textit{IETF RFC 7519}, May 2015. [Online]. Available: \url{https://tools.ietf.org/html/rfc7519}
+
+\bibitem{pydantic2024docs}
+S.~Colvin, ``Pydantic documentation,'' 2024. [Online]. Available: \url{https://docs.pydantic.dev/}
+
+\bibitem{jose2024advisory}
+``CVE-2024-33663: python-jose JWT verification bypass,'' \textit{National Vulnerability Database}, 2024. [Online]. Available: \url{https://nvd.nist.gov/vuln/detail/CVE-2024-33663}
+
+\bibitem{aws2024ssm}
+Amazon Web Services, ``AWS Systems Manager Parameter Store,'' 2024. [Online]. Available: \url{https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html}
+
+\bibitem{jha2017cloud}
+J.~K. Jha and P.~Iyer, ``Cloud computing in construction industry,'' in \textit{Proc. Int. Conf. Innovative Mechanisms for Industry Applications (ICIMIA)}, Bangalore, India, 2017, pp.~232--235.
+
+\end{thebibliography}
+
+\balance
+
+\end{document}

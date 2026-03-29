@@ -47,7 +47,7 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
-      await login('examiner', 'ResearchTool2024');
+      await login('examiner', 'Research@Tool2024');
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.detail || 'Examiner login failed. Please try again.');
@@ -114,7 +114,7 @@ const Login = () => {
               </div>
               <div className="login-credential-row">
                 <span className="login-credential-label">Password:</span>
-                <code className="login-credential-value">ResearchTool2024</code>
+                <code className="login-credential-value">Research@Tool2024</code>
               </div>
             </div>
             <button

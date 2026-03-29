@@ -1,0 +1,26 @@
+app/models.py:9:1: F401 'sqlalchemy.Float' imported but unused
+app/models.py:9:1: F401 'sqlalchemy.Date' imported but unused
+app/models.py:9:1: F401 'sqlalchemy.Time' imported but unused
+app/models.py:64:121: E501 line too long (122 > 120 characters)
+app/routers/appointments.py:9:1: F401 'fastapi.status' imported but unused
+app/routers/appointments.py:65:121: E501 line too long (142 > 120 characters)
+app/routers/appointments.py:82:121: E501 line too long (142 > 120 characters)
+app/routers/appointments.py:115:121: E501 line too long (124 > 120 characters)
+app/routers/appointments.py:129:121: E501 line too long (123 > 120 characters)
+app/routers/appointments.py:131:117: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+app/routers/appointments.py:131:121: E501 line too long (132 > 120 characters)
+app/routers/appointments.py:152:121: E501 line too long (137 > 120 characters)
+app/routers/appointments.py:157:117: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+app/routers/appointments.py:157:121: E501 line too long (132 > 120 characters)
+app/routers/appointments.py:161:121: E501 line too long (121 > 120 characters)
+app/routers/appointments.py:179:121: E501 line too long (145 > 120 characters)
+app/routers/auth.py:5:1: F401 'fastapi.status' imported but unused
+app/routers/providers.py:6:1: F401 'fastapi.status' imported but unused
+app/routers/providers.py:34:76: E712 comparison to True should be 'if cond is True:' or 'if cond:'
+app/routers/providers.py:62:121: E501 line too long (135 > 120 characters)
+app/schemas.py:52:5: E301 expected 1 blank line, found 0
+app/schemas.py:82:5: E301 expected 1 blank line, found 0
+2     E301 expected 1 blank line, found 0
+11    E501 line too long (122 > 120 characters)
+3     E712 comparison to True should be 'if cond is True:' or 'if cond:'
+6     F401 'sqlalchemy.Float' imported but unused

@@ -1,12 +1,29 @@
-"""Pydantic Schemas. MSc Cloud DevOpsSec - Research Paper Annotation Tool"""
+"""Pydantic Schemas with strong password validation and title capitalisation.
+MSc Cloud DevOpsSec - Research Paper Annotation Tool"""
+import re
 from datetime import datetime
 from typing import Optional, List
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
+
 
 class SignupRequest(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
-    password: str = Field(..., min_length=6)
+    password: str = Field(..., min_length=8)
+
+    @field_validator("password")
+    @classmethod
+    def validate_password_strength(cls, v):
+        """Enforce mix of uppercase, lowercase, digit, and special character."""
+        if not re.search(r"[A-Z]", v):
+            raise ValueError("Password must contain at least one uppercase letter")
+        if not re.search(r"[a-z]", v):
+            raise ValueError("Password must contain at least one lowercase letter")
+        if not re.search(r"[0-9]", v):
+            raise ValueError("Password must contain at least one digit")
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>_\-]", v):
+            raise ValueError("Password must contain at least one special character")
+        return v
 
 class LoginRequest(BaseModel):
     username: str = Field(..., min_length=3)
@@ -26,6 +43,18 @@ class PaperRequest(BaseModel):
     abstract: Optional[str] = ""
     publicationUrl: Optional[str] = ""
     publicationYear: int = Field(..., ge=1900, le=2030)
+
+    @field_validator("title")
+    @classmethod
+    def capitalise_title(cls, v):
+        """Auto-capitalise paper title (title case)."""
+        return v.title() if v else v
+
+    @field_validator("authors")
+    @classmethod
+    def capitalise_authors(cls, v):
+        """Auto-capitalise author names (title case)."""
+        return v.title() if v else v
 
 class PaperResponse(BaseModel):
     id: int

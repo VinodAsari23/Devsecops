@@ -35,7 +35,7 @@ def client(db):
 
 @pytest.fixture
 def test_user(db):
-    u = User(username="testuser", email="test@test.com", password_hash=hash_password("password123"), role=UserRole.RESEARCHER)
+    u = User(username="testuser", email="test@test.com", password_hash=hash_password("Password@123"), role=UserRole.RESEARCHER)
     db.add(u); db.commit(); db.refresh(u); return u
 
 @pytest.fixture
