@@ -21,3 +21,9 @@ frontend/build/
 reports/
 report/
 *.zip
+
+all-reports/
+mahesh-report/
+vinod-report/
+*.zip
+node_modules/
