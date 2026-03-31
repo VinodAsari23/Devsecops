@@ -63,7 +63,7 @@ const Login = () => {
           <div className="login-header-decoration"></div>
           <h1 className="login-brand">ScholarNotes</h1>
           <p className="login-subtitle">Research Paper Annotation Tool</p>
-          <p className="login-institution">MSc Cloud DevOpsSec - National College of Ireland</p>
+          
         </div>
 
         <div className="login-body">
