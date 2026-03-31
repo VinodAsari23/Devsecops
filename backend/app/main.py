@@ -16,7 +16,8 @@ app.include_router(annotations.router)
 def seed_demo_data():
     db = SessionLocal()
     try:
-        if db.query(User).filter(User.username == "examiner").first():
+        existing = db.query(User).filter(User.username.ilike("examiner")).first()
+        if existing:
             return
         admin = User(username="examiner", email="examiner@nci.ie",
                      password_hash=hash_password("Research@Tool2024"), role=UserRole.ADMIN)
@@ -70,11 +71,13 @@ def seed_demo_data():
 
 @app.on_event("startup")
 def on_startup():
-    try:
-        Base.metadata.create_all(bind=engine)
-        seed_demo_data()
-    except Exception:
-        pass
+    Base.metadata.create_all(bind=engine)
+    seed_demo_data()
+
+@app.get("/api/seed-demo")
+def trigger_seed():
+    seed_demo_data()
+    return {"message": "Demo data seeded successfully"}
 
 @app.get("/actuator/health")
 def health_check():
