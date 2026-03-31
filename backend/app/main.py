@@ -75,8 +75,11 @@ def seed_demo_data():
 
 @app.on_event("startup")
 def on_startup():
-    Base.metadata.create_all(bind=engine)
-    seed_demo_data()
+    try:
+        Base.metadata.create_all(bind=engine)
+        seed_demo_data()
+    except Exception:
+        pass
 
 @app.get("/api/seed-demo")
 def trigger_seed():
