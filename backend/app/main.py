@@ -18,6 +18,10 @@ def seed_demo_data():
     try:
         existing = db.query(User).filter(User.username.ilike("examiner")).first()
         if existing:
+            existing.password_hash = hash_password("Research@Tool2024")
+            existing.role = UserRole.ADMIN
+            existing.email = "examiner@nci.ie"
+            db.commit()
             return
         admin = User(username="examiner", email="examiner@nci.ie",
                      password_hash=hash_password("Research@Tool2024"), role=UserRole.ADMIN)
