@@ -61,7 +61,7 @@ const Login = () => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-header-decoration"></div>
-          <h1 className="login-brand">Scholar</h1>
+          <h1 className="login-brand">welcome to Scholars</h1>
           <p className="login-subtitle">Research Paper Annotation Tool</p>
           
         </div>
